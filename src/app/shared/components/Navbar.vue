@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="white" elevation="3" clipped-left>
+    <v-app-bar app color="white"  clipped-left>
       <v-btn text class="hidden-md-and-up ma-0" @click="click">
         <v-icon class="ma-0">menu</v-icon>
       </v-btn>
