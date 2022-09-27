@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="white"  clipped-left>
+    <v-app-bar app color="white"  clipped-left elevation="1" >
       <v-btn text class="hidden-md-and-up ma-0" @click="click">
         <v-icon class="ma-0">menu</v-icon>
       </v-btn>
@@ -76,7 +76,7 @@
     <v-navigation-drawer v-model="sidebar" app clipped>
       <v-list nav dense>
         <v-list-item-group v-model="selectedItem" color="primary">
-          <v-list-item v-for="(item, i) in menuItems" :key="i">
+          <v-list-item v-for="(item, i) in menuItems" :key="i" :to="item.path">
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
@@ -123,9 +123,9 @@ export default {
       selectedItem: 0,
       selectedItem2: null,
       menuItems: [
-        { title: "Newsfeed", path: "/", icon: "home" },
-        { title: "Events", path: "/", icon: "event" },
-        { title: "Profile", path: "/", icon: "person" },
+        { title: "Newsfeed", path: "/newsfeed", icon: "home" },
+        { title: "Events", path: "/event", icon: "event" },
+        { title: "Profile", path: "/post/1", icon: "person" },
       ],
       items: [
         {

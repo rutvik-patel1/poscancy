@@ -55,7 +55,8 @@
         <div class="d-block font-weight-bold">John Smit</div>
         <div class="d-block">nice post....</div>
       </v-col>
-    </v-row>
+    </v-row >
+    <v-row class="mb-2" justify="center"><v-btn depressed>See More Comments</v-btn></v-row>
   </div>
 </template>
 
