@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './shared/components/HelloWorld.vue'
+import Login from './shared/components/UserLogin.vue'
+import ResetPass from './shared/components/ResetPass.vue'
+import Chat from './community/poscancyChat.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +13,22 @@ const routes = [
     name: 'Home',
     component: Home
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/reset',
+    name: 'reset',
+    component: ResetPass
+  },
+  {
+    path: '/chat',
+    name: 'chat',
+    component: Chat
+  },
+  
   // {
   //   path: '/about',
   //   name: 'About',
