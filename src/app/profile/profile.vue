@@ -1,14 +1,14 @@
 <template>
   <div class="ma-6 pa-6">
     <UserPhoto></UserPhoto>
-
+    <h1>hello</h1>
     <div class="mt-4">
       <v-tabs v-model="activeTab" grow>
-      <v-tab v-for="tab of tabs" :key="tab.id" :to="tab.route" exact>
+      <v-tab v-for="tab of tabs" :key="tab.name" :to="tab.route" exact>
         {{ tab.name }}
       </v-tab>
 
-      <v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.route">
+      <v-tab-item v-for="tab of tabs" :key="tab.name" :value="tab.route">
         <router-view></router-view>
       </v-tab-item>
     </v-tabs>
@@ -27,9 +27,9 @@ export default {
     return {
       activeTab: `/profile`,
       tabs: [
-        { id: 1, name: "About", route: `/profile`},
-        { id: 2, name: "Friends", route:`/profile/friends` },
-        { id: 3, name: "Photos", route: `/profile/photos` },
+        { name: "About", route: `/profile`},
+        { name: "Friends", route:`/profile/friends` },
+        { name: "Photos", route: `/profile/photos` },
       ],
     };
   },
