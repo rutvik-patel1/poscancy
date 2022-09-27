@@ -1,28 +1,24 @@
 <template>
   <v-app>
-    <Navbar ></Navbar>
+    <Navbar></Navbar>
 
-    <v-main color="primary" :style="{background: $vuetify.theme.themes['light'].background}" >
-      
-      <detailed-post></detailed-post>
-      <HelloWorldVue/>
-
+    <v-main
+      color="primary"
+      :style="{ background: $vuetify.theme.themes['light'].background }"
+    >
+      <router-view></router-view>
     </v-main>
-   
   </v-app>
 </template>
 
 <script>
-import Navbar from './shared/components/Navbar.vue';
-import HelloWorldVue from './shared/components/HelloWorld.vue';
-import DetailedPost from './posts/DetailedPost.vue';
+import Navbar from "./shared/components/Navbar.vue";
+
 export default {
   name: "App",
 
   components: {
     Navbar,
-    HelloWorldVue,
-    DetailedPost
   },
 
   data: () => ({
