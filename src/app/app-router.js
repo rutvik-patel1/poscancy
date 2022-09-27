@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './shared/components/MainContainer.vue'
+import { eventsRoutes } from './events'
+import { postsRoutes } from './posts'
 
 Vue.use(VueRouter)
 
-const routes = [
+
+const appRoutes = [
   {
     path: '/',
     name: 'Home',
@@ -16,21 +19,14 @@ const routes = [
     component: () => import('./shared/components/MainContainer.vue')
 
   },
-  {
-    path: '/event',
-    name: 'Home',
-    component: () => import('./events/EventContainer.vue')
-  },
-  {
-    path: '/event/:id',
-    name: 'EventPage',
-    component: () => import('./events/EventPage.vue')
-  },
-  {
-    path: '/post/:id',
-    name: 'Home',
-    component: () => import('./posts/DetailedPost.vue')
-  },
+  
+
+]
+
+const routes = [
+  ...appRoutes,
+  ...eventsRoutes,
+  ...postsRoutes,
 ]
 
 const router = new VueRouter({

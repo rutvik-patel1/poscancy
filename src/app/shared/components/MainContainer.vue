@@ -12,8 +12,8 @@
   </template>
   
   <script>
-  import PostCard from '../../posts/PostCard.vue';
-  import EventCard from '../../events/EventCard.vue'
+  import PostCard from '../../posts/shared/PostCard.vue';
+  import EventCard from '../../events/shared/EventCard.vue'
   export default {
     name: "HelloWorld",
     components:{
