@@ -1,7 +1,7 @@
 <template>
   <v-card :loading="loading" class="mx-5 my-12 pa-4 pb-0">
     <v-row class="mb-1">
-      <v-col cols="2"  lg="1">
+      <v-col cols="2" lg="1">
         <v-avatar size="45px" v-bind="attrs" v-on="on">
           <img
             alt="Avatar"
@@ -9,15 +9,54 @@
           />
         </v-avatar>
       </v-col>
-      <v-col cols="4"  lg="8" class="pl-4">
+      <v-col cols="4" lg="7" class="pl-4">
         <div class="d-block font-weight-bold">John Smit</div>
         <div class="d-block text-caption">1 hr Ago</div>
       </v-col>
-      <v-col cols="6"  lg="3">
+      <v-col cols="5" lg="3">
         <v-btn depressed>
           Follow
           <v-icon>add</v-icon>
         </v-btn>
+      </v-col>
+      <v-col cols="1" lg="1">
+        <v-menu v-model="showMenu" absolute offset-y style="max-width: 600px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn depressed icon v-bind="attrs" v-on="on">
+              <v-icon>more_vert</v-icon>
+            </v-btn>
+          </template>
+
+          <v-list dense>
+            <template v-for="(item, index) in items">
+              <v-subheader
+                v-if="item.header"
+                :key="item.header"
+                v-text="item.header"
+              ></v-subheader>
+
+              <v-divider
+                v-else-if="item.divider"
+                :key="index"
+                :inset="item.inset"
+              ></v-divider>
+
+              <v-list-item v-else :key="item.title">
+                <v-list-item-icon>
+                  <!-- <v-img :src="item.icon"></v-img> -->
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title v-html="item.title"></v-list-item-title>
+                  <v-list-item-subtitle
+                    v-html="item.subtitle"
+                  ></v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+          </v-list>
+        </v-menu>
       </v-col>
     </v-row>
 
@@ -72,10 +111,29 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      items: [
+        {
+          icon: "delete",
+          title: "Delete Post",
+          subtitle: `Remove this post`,
+        },
+        { divider: true, inset: true },
+        {
+          icon: "save",
+          title: "Save Post",
+          subtitle: `Add this to your saved items`,
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style>
-  html { overflow-y: auto }
-
+html {
+  overflow-y: auto;
+}
 </style>
