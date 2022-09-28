@@ -17,8 +17,12 @@ const appRoutes = [
     path: '/newsfeed',
     name: 'newsfeed',
     component: () => import('./shared/components/MainContainer.vue')
-
   },
+  {
+    path:'/admin/event/create',
+    name:'CreateEvent',
+    component: () => import('./admin/shared/CreateEvent.vue')
+  }
   
 
 ]
