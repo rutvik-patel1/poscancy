@@ -18,5 +18,5 @@ export default {
 };
 </script>
 <style>
-  .bg{ background: linear-gradient(45deg, #0A66C2 0%, #777d74 100%)}
+  .bg{ background: linear-gradient(45deg, #0A66C2 0%, #777d74 100%); }
 </style>

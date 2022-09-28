@@ -3,7 +3,7 @@
     <v-layout row wrap  class="login">
       <v-flex  class="text-xs-center" style="text-align:-webkit-center;"  mt-3>
         <h1>
-        <img src="../../../../public/img/icons/image-bg.png" 
+        <img src="../../../public/img/icons/image-bg.png" 
              width="12%"/>
         <span> {{  title.h1 }} </span> </h1>
          <h3 > {{ title.h3 }} </h3>
