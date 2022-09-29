@@ -2,10 +2,7 @@
     <v-row>
       <div class="col-12 col-sm-8">
         <event-card></event-card>
-        <post-card></post-card>
-        <!-- <post-card></post-card>
-        <post-card></post-card> -->
-        
+        <post-card></post-card>  
       </div>
       <div class="col-12 col-sm-4">hello2</div>
     </v-row>

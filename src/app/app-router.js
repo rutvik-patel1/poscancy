@@ -19,10 +19,20 @@ const appRoutes = [
     component: () => import('./shared/components/MainContainer.vue')
   },
   {
+    path:'/admin/event/',
+    name:'AdminEvent',
+    component: () => import('./admin/shared/AdminEvent.vue')
+  },
+  {
+    path:'/admin/event/:id/response',
+    name:'AdminEvent',
+    component: () => import('./admin/shared/EventResponse.vue')
+  },
+  {
     path:'/admin/event/create',
     name:'CreateEvent',
     component: () => import('./admin/shared/CreateEvent.vue')
-  }
+  },
   
 
 ]
