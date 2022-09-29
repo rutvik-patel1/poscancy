@@ -5,7 +5,6 @@ import Home from './shared/components/MainContainer.vue'
 import { eventsRoutes } from './events'
 import { postsRoutes } from './posts'
 
-
 import adminRoutes from './admin/admin-routes.js'
 import authRoutes from './auth/auth-routes.js'
 import communityRoutes from './community/community-routes.js'
