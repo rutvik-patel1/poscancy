@@ -1,5 +1,8 @@
 <template>
-  <div class="ma-6 pa-6">
+  <div :class="{
+          'ma-0 pa-2': $vuetify.breakpoint.smAndDown,
+          'ma-0 pa-6': $vuetify.breakpoint.mdAndUp,
+        }">
     <UserPhoto></UserPhoto>
     <div class="mt-4">
       <v-tabs v-model="activeTab" grow>

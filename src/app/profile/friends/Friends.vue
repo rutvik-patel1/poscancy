@@ -1,12 +1,21 @@
 <template>
-  <div class="ma-4">
+  <div :class="{
+          'ma-0 pa-2': $vuetify.breakpoint.smAndDown,
+          'ma-0 pa-4': $vuetify.breakpoint.mdAndUp,
+        }">
     <v-card elevation="2" outlined>
       <v-card-title> Friends </v-card-title>
 
-      <div class="px-6">
+      <div  :class="{
+          'ma-0 pa-1': $vuetify.breakpoint.smAndDown,
+          'ma-0 pa-2': $vuetify.breakpoint.mdAndUp,
+        }">
         <v-divider></v-divider>
       </div>
-      <div class="ma-6">
+      <div  :class="{
+          'ma-0 pa-0': $vuetify.breakpoint.smAndDown,
+          'ma-0 pa-2': $vuetify.breakpoint.mdAndUp,
+        }">
         <v-tabs v-model="activeTab" grow>
           <v-tab v-for="tab of tabs" :key="tab.id" :to="tab.route" exact>
             {{ tab.name }}

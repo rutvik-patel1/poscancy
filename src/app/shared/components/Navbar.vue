@@ -125,7 +125,7 @@ export default {
       menuItems: [
         { title: "Newsfeed", path: "/newsfeed", icon: "home" },
         { title: "Events", path: "/event", icon: "event" },
-        { title: "Profile", path: "/post/1", icon: "person" },
+        { title: "Profile", path: "/profile", icon: "person" },
       ],
       items: [
         {
