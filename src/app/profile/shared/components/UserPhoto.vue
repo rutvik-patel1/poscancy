@@ -8,10 +8,9 @@
         style="overflow: visible"
       >
         <v-avatar
-          style="postion: absolute; left: 47%; top: 80%"
           rounded
           width="100px"
-          class="pa-1"
+          class="pa-1 user-photo"
           height="100px"
         >
           <img
@@ -22,8 +21,16 @@
         </v-avatar>
       </v-img>
       <div class="text-center">
-            <h3 class="mt-16">Thing</h3>
-          </div>
+        <h3 class="mt-16">Robert</h3>
+      </div>
     </v-card>
   </div>
 </template>
+
+<style scoped>
+  .user-photo{
+    position: absolute; 
+    top: 80%; 
+    left: 42%;
+  }
+</style>

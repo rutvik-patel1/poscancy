@@ -1,6 +1,13 @@
 <template>
-  <div class="pt-4">
-    <v-container>
+  <div class="newsfeed-container">
+    <div  v-if="mobile">
+      <v-row>
+        <v-col cols="12" xl="8" lg="8" md="8" sm="12" xs="12">
+          <Article></Article>
+        </v-col>
+      </v-row>
+    </div>
+    <div v-else>
       <v-row>
         <v-col cols="12" xl="8" lg="8" md="8" sm="12" xs="12">
           <Article></Article>
@@ -10,27 +17,31 @@
           <News></News>
         </v-col>
       </v-row>
-    </v-container>
+    </div>
   </div>
 </template>
 
 <script>
-import Article from './Article.vue'
-import News from './News.vue'
+import Article from "./Article.vue";
+import News from "./News.vue";
 
 export default {
   name: "NewsFeed",
   components: {
     Article,
-    News
+    News,
   },
-  data: () => ({
-  }),
+  data: () => ({}),
+  computed: {
+  mobile() {
+    return this.$vuetify.breakpoint.xs;
+  },
+}
 };
 </script>
 
 <style scoped>
-.newsfeed-card {
-  width: 100%;
+.newsfeed-container {
+  padding: 20px;
 }
 </style>
