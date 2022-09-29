@@ -1,8 +1,13 @@
 <template>
-  <v-container class="px-15">
-    <v-card :loading="loading" class="mx-5 my-12 pa-4 pb-1">
+  <v-container 
+  :class="{
+          'px-0': $vuetify.breakpoint.smAndDown,
+          'px-15': $vuetify.breakpoint.mdAndUp,
+        }"
+  >
+    <v-card :loading="loading" class="mx-1 my-1 pa-4 pb-1">
       <v-row class="mb-1">
-        <v-col cols="2" lg="1">
+        <v-col cols="2" lg="1" sm="1">
           <v-avatar size="45px"  v-bind="attrs" v-on="on">
             <img
               alt="Avatar"
@@ -10,11 +15,11 @@
             />
           </v-avatar>
         </v-col>
-        <v-col cols="4" lg="9" class="pl-4">
+        <v-col cols="5" lg="9" sm="8" class="pl-4">
           <div class="d-block font-weight-bold">John Smit</div>
           <div class="d-block text-caption">1 hr Ago</div>
         </v-col>
-        <v-col cols="6" lg="2">
+        <v-col cols="5" lg="2" sm="1">
           <v-btn depressed>
             Follow
             <v-icon>add</v-icon>
