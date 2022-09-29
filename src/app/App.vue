@@ -27,3 +27,11 @@ export default {
   }),
 };
 </script>
+
+
+<!-- <style>
+  *{
+    background-color: #ECEEFD;
+  }
+</style> -->
+
