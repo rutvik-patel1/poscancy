@@ -1,5 +1,5 @@
 <template>
-  <v-container> 
+  <v-container fluid class="bg"> 
     <v-layout row wrap  class="login">
       <v-flex  class="text-xs-center" style="text-align:-webkit-center;"  mt-3>
         <h1>
@@ -84,3 +84,17 @@
    }
 }
 </script>
+<style css scoped>
+  .login { 
+      margin-left: 23%; margin-top: 5%; padding-bottom: 3%; 
+        margin-right: 23%; background-color: #ECEEFD;
+      border-radius:7em; align-content: center;}
+      .bg{ background: linear-gradient(45deg, #0A66C2 0%, #777d74 100%); height:100%; width:200%;}
+    h1{ 
+       color: #0A66C2; 
+       padding-top: 14px;
+       padding-left:5px;
+       float:top; }
+    h1 > span { position: relative; top:-1em;} 
+    h3{ font-size: 160%; font-weight: 500;}  
+</style>

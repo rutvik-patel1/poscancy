@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main  class="bg">
+    <v-main>
       <router-view />
       
     </v-main>
@@ -18,5 +18,5 @@ export default {
 };
 </script>
 <style>
-  .bg{ background: linear-gradient(45deg, #0A66C2 0%, #777d74 100%); }
+  
 </style>

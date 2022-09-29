@@ -57,13 +57,16 @@
       {id:1,user:'User1',message:'Poscancy chat'},{id:2,user:'Admin',message:'Welcome to poscancy chat'},
       {id:3,user:'User2',message:'Lets Exploore......'},{id:1,user:'User1',message:'Ack & Responded...'},
       {id:3,user:'User2',message:'Lets Exploore......'},{id:1,user:'User1',message:'Ack & Responded...'},
-    { id:4, user:'User3', message:'Ok Lets proceed Goooooooooo goooooooooooooo.... ' } ]
+      { id:4, user:'User3', message:'Ok Lets proceed Goooooooooo goooooooooooooo.... ' } ]
     }
    },
   }
 </script>
-<style>
+<style css scoped>
  .chat { background-color: #ECEEFD; height: 100%; width:110%;}
+ h1{ 
+  color: #0A66C2;  padding-top: 14px; padding-left:5px; float:top; 
+   }
  .chatBoxFixed { position: fixed; right:1px; left:3px; bottom:1em; }
  .chatBoxInitial { position: initial; right:1px; left:3px; bottom:1em; }
  .community { color: #0A66C2; font-weight: 300; font-size: 200%; 

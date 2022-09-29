@@ -1,35 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './shared/components/HelloWorld.vue'
-import Login from './auth/UserLogin.vue'
-import ResetPass from './auth/ResetPass.vue'
-import Chat from './community/poscancyChat.vue'
-
+import adminRoutes from './admin/admin-routes.js'
+import authRoutes from './auth/auth-routes.js'
+import communityRoutes from './community/community-routes.js'
 Vue.use(VueRouter)
 
-const routes = [
+const appRoutes = [
   {
     path: '/',
     name: 'Home',
     component: Home
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login
-  },
-  {
-    path: '/reset',
-    name: 'reset',
-    component: ResetPass
-  },
-  {
-    path: '/chat',
-    name: 'chat',
-    component: Chat
-  },
   
-  // {
+    // {
   //   path: '/about',
   //   name: 'About',
   //   // route level code-splitting
@@ -38,7 +22,7 @@ const routes = [
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
 ]
-
+const routes = [ ...appRoutes,...adminRoutes,...authRoutes,...communityRoutes ]
 const router = new VueRouter({
   mode: 'history',
   routes
