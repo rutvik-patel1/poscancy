@@ -7,7 +7,7 @@
         <v-card
           v-for="item in items"
           :key="item"
-          class="pa-2 ma-4"
+          class="pa-2 ma-4 rounded-xl"
           outlined
         >
           <v-container>
