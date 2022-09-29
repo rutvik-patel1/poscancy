@@ -5,8 +5,11 @@ import Home from './shared/components/MainContainer.vue'
 import { eventsRoutes } from './events'
 import { postsRoutes } from './posts'
 
-Vue.use(VueRouter)
 
+import adminRoutes from './admin/admin-routes.js'
+import authRoutes from './auth/auth-routes.js'
+import communityRoutes from './community/community-routes.js'
+Vue.use(VueRouter)
 
 const appRoutes = [
   {
@@ -26,9 +29,11 @@ const routes = [
   ...appRoutes,
   ...eventsRoutes,
   ...postsRoutes,
-  ...profileRoutes
+  ...profileRoutes,
+  ...adminRoutes,
+  ...authRoutes,
+  ...communityRoutes
 ]
-
 const router = new VueRouter({
   mode: 'history',
   routes,

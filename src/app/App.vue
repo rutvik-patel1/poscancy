@@ -20,7 +20,6 @@ export default {
   components: {
     Navbar,
   },
-
   data: () => ({
     //
     sidebar: false,
