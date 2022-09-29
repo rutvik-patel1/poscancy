@@ -3,10 +3,7 @@
       <div class="col-12 col-sm-8">
         <article-vue class="mx-5 my-6 pa-4 pb-0"></article-vue>
         <event-card></event-card>
-        <post-card></post-card>
-        <!-- <post-card></post-card>
-        <post-card></post-card> -->
-        
+        <post-card></post-card>  
       </div>
       <div class="col-12 col-sm-4">
         <news-vue class="mx-5 my-6 pa-4 pb-0"></news-vue>
