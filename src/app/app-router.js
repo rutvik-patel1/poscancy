@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from './shared/components/HelloWorld.vue'
-import NewsFeed from './shared/components/NewsFeed.vue'
 import { profileRoutes } from './profile'
+import Home from './shared/components/MainContainer.vue'
+import { eventsRoutes } from './events'
+import { postsRoutes } from './posts'
 
 Vue.use(VueRouter)
+
 
 const appRoutes = [
   {
@@ -15,11 +17,17 @@ const appRoutes = [
   {
     path: '/newsfeed',
     name: 'NewsFeed',
-    component: NewsFeed
+    component: () => import('./shared/components/MainContainer.vue')
   },
+
 ]
 
-const routes = [...profileRoutes, ...appRoutes];
+const routes = [
+  ...appRoutes,
+  ...eventsRoutes,
+  ...postsRoutes,
+  ...profileRoutes
+]
 
 const router = new VueRouter({
   mode: 'history',
