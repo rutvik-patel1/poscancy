@@ -5,7 +5,7 @@
         <Article></Article>
       </v-card>
       <v-card outlined class="ma-6">
-        <News></News>
+        <Post></Post>
       </v-card>
     </v-card>
   </div>
@@ -13,12 +13,12 @@
 
 <script>
 import Article from "../../../shared/components/Article.vue";
-import News from "../../../shared/components/News.vue";
+import Post from '../../../posts/shared/DetailedPost.vue'
 export default {
   name: "Photos",
   components: {
     Article,
-    News
+    Post
   },
 };
 </script>

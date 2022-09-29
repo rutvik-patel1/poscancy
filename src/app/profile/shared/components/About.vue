@@ -1,5 +1,8 @@
 <template>
-  <div class="ma-4">
+  <div :class="{
+          'ma-0 pa-2': $vuetify.breakpoint.smAndDown,
+          'ma-0 pa-4': $vuetify.breakpoint.mdAndUp,
+        }">
     <v-card elevation="2" outlined>
       <v-card-title> Persional Information </v-card-title>
 
