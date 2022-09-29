@@ -20,10 +20,17 @@ export default {
   components: {
     Navbar,
   },
-
   data: () => ({
     //
     sidebar: false,
   }),
 };
 </script>
+
+
+<!-- <style>
+  *{
+    background-color: #ECEEFD;
+  }
+</style> -->
+
