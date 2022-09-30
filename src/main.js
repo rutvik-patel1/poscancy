@@ -6,7 +6,7 @@ import store from './app/app-state'
 import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
-
+// eslint-disable-next-line no-undef
 new Vue({
   router,
   store,

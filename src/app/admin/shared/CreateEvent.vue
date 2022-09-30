@@ -1,5 +1,5 @@
 <template>
-  <v-conainer key="a">
+  <div>
     <v-card class="mx-2 my-2 pa-1 pb-1 pb-15">
       <v-card-title>Create Event</v-card-title>
       <v-divider></v-divider>
@@ -126,7 +126,7 @@
         </v-col>
       </v-row>
     </v-card>
-  </v-conainer>
+  </div>
 </template>
 
 <script>
