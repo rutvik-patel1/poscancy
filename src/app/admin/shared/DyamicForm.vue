@@ -135,6 +135,8 @@
         </v-row>
       </v-col>
     </v-row>
+    
+
   </div>
 </template>
 
@@ -167,7 +169,7 @@ export default {
         { name: "Integer", value: "integer" },
         { name: "Number", value: "number" },
       ],
-      schema: {},
+      schema:{},
       SchemaObj: {
         type: "object",
         properties: this.schema2,
@@ -193,18 +195,18 @@ export default {
       return this.schema;
     },
     uchema() {
-      return {
+      return  {
         type: "object",
         properties: this.schema2,
-      };
-    },
+      }
+    }
   },
   methods: {
-    showPreview() {
-      this.isPreview = true;
+    showPreview(){
+      this.isPreview = true
     },
-    deleteSchema(id) {
-      this.$delete(this.schema2, id);
+    deleteSchema(id){
+        this.$delete(this.schema2,id)
     },
     addField() {
       console.log("clicked");
