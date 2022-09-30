@@ -1,21 +1,30 @@
 <template>
-  <v-container class="px-15">
-    <v-card :loading="loading" class="mx-5 my-12 pa-4 pb-1">
-      <v-row class="mb-1">
-        <v-col cols="4" lg="10" class="pl-4">
+  <v-container
+  :class="{
+          'px-0': $vuetify.breakpoint.smAndDown,
+          'px-15': $vuetify.breakpoint.mdAndUp,
+        }"
+  >
+    <v-card :loading="loading" class="mx-1 my-1 pa-4 pb-1">
+      <v-row>
+        <v-col cols="7" lg="10" class="pl-4">
           <div class="d-block font-weight-bold text-h5" style="color: #0a66c2">
             Annual Goa Trip
           </div>
-          <div class="d-block text-caption">15 Sep 2022 to 21 Sep 2022</div>
+          
         </v-col>
-        <v-col cols="6" lg="2">
+        <v-col cols="5" lg="2">
           <v-btn depressed>
             Follow
             <v-icon>add</v-icon>
           </v-btn>
         </v-col>
       </v-row>
-
+      <v-row class="mb-1">
+        <v-col class="pl-4">
+          <div class="d-block text-caption">15 Sep 2022 to 21 Sep 2022</div>
+        </v-col>
+      </v-row>
       <v-img
         height="250"
         max-width="400"
@@ -44,7 +53,12 @@
 
       <v-divider class="mb-7"></v-divider>
 
-      <v-row justify="center" class="pa-5">
+      <v-row justify="center"
+      :class="{
+          'pa-0': $vuetify.breakpoint.smAndDown,
+          'pa-5': $vuetify.breakpoint.mdAndUp,
+        }"
+      >
         <v-expansion-panels accordion>
           <v-expansion-panel>
             <v-expansion-panel-header
