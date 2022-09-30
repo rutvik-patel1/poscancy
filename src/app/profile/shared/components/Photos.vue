@@ -1,9 +1,9 @@
 <template>
-  <div class="ma-4">
-    <v-card outlined class="ma-6">
+  <div>
+    <v-card outlined>
         <Article></Article>
       </v-card>
-      <post-card class="ma-6"></post-card>
+      <post-card></post-card>
   </div>
 </template>
 

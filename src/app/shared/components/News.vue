@@ -1,9 +1,9 @@
 <template>
   <v-card class="pa-2">
     <h2 class="mt-4">
-      <v-icon>mdi-bullhorn-variant-outline</v-icon>
+      <v-badge color="red" content="6"> <v-icon>mdi-bullhorn-variant-outline</v-icon> </v-badge>
       <span class="mx-4"
-        ><v-badge color="red" content="6"> News & Updated </v-badge></span
+        > News & Updates</span
       >
     </h2>
 
