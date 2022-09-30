@@ -1,8 +1,8 @@
 <template>
     <v-container fluid class="admin">
-     <v-layout style="background-color:#0A66C2; border-radius:1em;"> 
+     <v-layout class="admin-header"> 
       <v-flex> 
-       <h1> {{ "Users" }} </h1>
+       <h3> {{ "Users" }} </h3>
       </v-flex>
     </v-layout>
     <v-layout column mt-1>
@@ -61,10 +61,11 @@
   </script>
 <style css scoped>
     .admin{  background-color: #ECEEFD; height:100%;}
+    .admin-header{ background-color:#0A66C2; border-radius:0.6em; margin: auto;}
     thead { background-color:darkgray;}
     th,td { border: 1px solid gray;}
     th > h2 { font-size: x-large;} 
     td > span { font-size: 1.5em;}
-    h1{  color: #ECEEFD; padding-top:-1em; padding-left:1.4em; font-size:3em; }
+    h3{  color: #ECEEFD; padding-top:-1.1em; padding-left:1.6em; font-size:2em; }
 
 </style>
