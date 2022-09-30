@@ -25,7 +25,7 @@
                     <v-card max-width="500" 
                             class="mx-auto" 
                             v-if="item.includes('Create')"
-                            flat>
+                            >
                          
                          <v-row  class="mx-5 mt-3" 
                                 v-for="(index,email) in emails" :key="index"
@@ -60,10 +60,10 @@
                     </v-card>
                     <v-card v-else
                             max-width="600" 
-                            flat
+                            
                             class=" mx-auto mb-4" >
                         
-                        <v-file-input flat 
+                        <v-file-input  
                             show-size
                             prepend-icon="mdi-file"
                             placeholder="Add Excel or CSV File" />

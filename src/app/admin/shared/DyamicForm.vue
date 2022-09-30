@@ -32,6 +32,7 @@
               <v-text-field
                 dense
                 outlined
+                placeholder="Enter Option"
                 v-model="checkboxOption"
               ></v-text-field>
             </v-col>
@@ -86,7 +87,7 @@
         <div class="text-h6">Form Field List</div>
         <div
           style="
-            height: 200px;
+            height: 210px;
             overflow: scroll;
             border: 1px solid gray;
             padding-left: 15px;
@@ -102,16 +103,59 @@
             </li>
           </ul>
         </div>
-        <v-btn color="primary" width="100%" @click="previewForm">Preview Form</v-btn>
+        <!-- <v-btn color="primary" width="100%" @click="showPreview()">Preview Form</v-btn> -->
+        <v-row justify="center">
+      <v-dialog
+      v-model="dialog"
+      max-width="600px"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="primary"
+          dark
+          width="100%"
+          v-bind="attrs"
+          v-on="on"
+        >
+          Preview Form
+        </v-btn>
+      </template>
+     
+      <v-card class="pa-2">
+        <v-card-title>
+          <span class="text-h5">Preview Form</span>
+        </v-card-title>
+        <v-container>
+          <v-form ref="form" v-model="valid">
+            <v-jsf v-model="model" outlined :schema="uchema" @input="logEvent('input', $event)" @change="logEvent('change', $event)" @input-child="logEvent('input-child', $event)" @change-child="logEvent('change-child', $event)" />
+            <v-btn color="primary">Submit</v-btn>
+          </v-form>
+        </v-container>
+      </v-card>
+      </v-dialog>
+    </v-row>
       </v-col>
     </v-row>
+    
+
   </div>
 </template>
 
 <script>
+import VJsf from '@koumoul/vjsf/lib/VJsf.js'
+import '@koumoul/vjsf/lib/VJsf.css'
+import '@koumoul/vjsf/lib/deps/third-party.js'
+
 export default {
+  components:{
+    VJsf
+  },
   data() {
     return {
+      dialog:false,
+      valid:false,
+      isPreview:false,
+      model:{},
       customElement: "text",
       selectedItem: 0,
       items: [
@@ -126,10 +170,10 @@ export default {
         { name: "Integer", value: "integer" },
         { name: "Number", value: "number" },
       ],
-      schema: {},
+      schema:{},
       SchemaObj: {
         type: "object",
-        properties: this.schema,
+        properties: this.schema2,
       },
       field: [],
       fieldName: {
@@ -151,8 +195,17 @@ export default {
     schema2() {
       return this.schema;
     },
+    uchema() {
+      return  {
+        type: "object",
+        properties: this.schema2,
+      }
+    }
   },
   methods: {
+    showPreview(){
+      this.isPreview = true
+    },
     deleteSchema(id){
         this.$delete(this.schema2,id)
     },

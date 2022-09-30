@@ -2,7 +2,7 @@
   <v-card :loading="loading" class="mx-5 my-12 pa-4 pb-0">
     <v-row class="mb-1">
       <v-col cols="2" lg="1">
-        <v-avatar size="45px" v-bind="attrs" v-on="on">
+        <v-avatar size="45px" >
           <img
             alt="Avatar"
             src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"

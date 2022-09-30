@@ -2,7 +2,7 @@
   <div>
     <v-row>
       <v-col cols="2" lg="1">
-        <v-avatar size="45px" v-bind="attrs" v-on="on">
+        <v-avatar size="45px" >
           <img
             alt="Avatar"
             src="https://avatars0.githubusercontent.com/u/90640?v=4&s=460"
@@ -16,7 +16,7 @@
     </v-row>
     <v-row class="mb-1">
       <v-col cols="2" lg="1">
-        <v-avatar size="45px" v-bind="attrs" v-on="on">
+        <v-avatar size="45px" >
           <img
             alt="Avatar"
             src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
@@ -30,7 +30,7 @@
     </v-row>
     <v-row class="mb-1">
       <v-col cols="2" lg="1">
-        <v-avatar size="45px" v-bind="attrs" v-on="on">
+        <v-avatar size="45px" >
           <img
             alt="Avatar"
             src="https://avatars0.githubusercontent.com/u/9064067?v=4&s=460"
@@ -44,7 +44,7 @@
     </v-row>
     <v-row class="mb-1">
       <v-col cols="2" lg="1">
-        <v-avatar size="45px" v-bind="attrs" v-on="on">
+        <v-avatar size="45px" >
           <img
             alt="Avatar"
             src="https://avatars0.githubusercontent.com/u/9064068?v=4&s=460"
