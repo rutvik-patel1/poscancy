@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Calender from "./shared/components/Calender.vue";
+import Calender from "./Calender.vue";
 export default {
   name: "Event",
   components: {

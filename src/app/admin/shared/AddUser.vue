@@ -8,10 +8,10 @@
 
         <v-dialog v-model="open" 
                   transition="dialog-top-transition"
-                  width="800">
-            <v-card max-width="800" outlined>
+                  width="500">
+            <v-card max-width="500" outlined>
              <v-card-title class="text-center justify-center">
-                <h2 class="text-h2 font-weight-bold"> {{ 'Add User'}} </h2>
+                 {{ 'Add User'}}
              </v-card-title>
             <v-tabs v-model="tab" grow outlined>
                 <v-tab v-for="item in items" :key="item">
@@ -22,7 +22,7 @@
                <v-tab-item v-for="item in items" 
                             :key="item" 
                             >
-                    <v-card max-width="600" 
+                    <v-card max-width="500" 
                             class="mx-auto" 
                             v-if="item.includes('Create')"
                             flat>

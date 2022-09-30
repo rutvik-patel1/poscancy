@@ -22,16 +22,12 @@
         </v-row>
 
         <v-row>
-          <v-col cols="12">
-            <v-row>
-              <v-col cols="12" xl="6" lg="6" md="6" sm="12" xs="12">
+          <v-col cols="12" xl="6" lg="6" md="6" sm="12" xs="12">
                 <v-btn outlined><v-icon>mdi-image-outline</v-icon> Photo</v-btn>
               </v-col>
               <v-col cols="12" xl="6" lg="6" md="6" sm="12" xs="12">
                 <v-btn outlined><v-icon>mdi-video-outline</v-icon> Video</v-btn>
               </v-col>
-            </v-row>
-          </v-col>
         </v-row>
       </v-col>
     </v-row>

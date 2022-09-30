@@ -4,7 +4,7 @@ import { profileRoutes } from './profile'
 import Home from './shared/components/MainContainer.vue'
 import { eventsRoutes } from './events'
 import { postsRoutes } from './posts'
-
+import { channelRoutes } from './channel'
 import adminRoutes from './admin/admin-routes.js'
 import authRoutes from './auth/auth-routes.js'
 import communityRoutes from './community/community-routes.js'
@@ -40,6 +40,7 @@ const appRoutes = [
 ]
 
 const routes = [
+  ...channelRoutes,
   ...appRoutes,
   ...eventsRoutes,
   ...postsRoutes,

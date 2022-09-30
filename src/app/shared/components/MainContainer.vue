@@ -1,12 +1,12 @@
 <template>
     <v-row>
       <div class="col-12 col-sm-8">
-        <article-vue class="mx-5 my-6 pa-4 pb-0"></article-vue>
+        <article-vue class="mx-3 my-6 pa-4 pb-0"></article-vue>
         <event-card></event-card>
         <post-card></post-card>  
       </div>
       <div class="col-12 col-sm-4">
-        <news-vue class="mx-5 my-6 pa-4 pb-0"></news-vue>
+        <news-vue class="ml-0 mr-3  my-6 pa-4 pb-0"></news-vue>
       </div>
     </v-row>
   </template>

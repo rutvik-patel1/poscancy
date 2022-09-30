@@ -5,6 +5,11 @@ const eventsRoutes = [
         component: () => import('./EventContainer.vue')
     },
     {
+        path: "/event/calender",
+        name: 'Event',
+        component: () => import('./Event.vue'),
+      },
+    {
         path: '/event/:id',
         name: 'EventPage',
         component: () => import('./shared/EventPage.vue')

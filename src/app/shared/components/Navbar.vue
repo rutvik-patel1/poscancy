@@ -125,7 +125,16 @@ export default {
       menuItems: [
         { title: "Newsfeed", path: "/newsfeed", icon: "home" },
         { title: "Events", path: "/event", icon: "event" },
+        { title: "Detailed Post", path: "/post/1", icon: "event" },
+        { title: "Detailed Event", path: "/event/1", icon: "event" },
+        { title: "Event Calander", path: "/event/calender", icon: "event" },
+        { title: "Admin Users", path: "/admin/users", icon: "person" },
         { title: "Profile", path: "/profile", icon: "person" },
+        { title: "Event Create", path: "/admin/event/create", icon: "create" },
+        { title: "Event Response", path: "/admin/event/1/response", icon:"event" },
+        { title: "chatroom", path: "/community/chat", icon: "chat" },
+        { title: "Login", path: "/login", icon: "chat" },
+        { title: "Rest Password", path: "/reset", icon: "chat" },
       ],
       items: [
         {
