@@ -1,24 +1,25 @@
 <template>
   <v-app>
-    <Navbar></Navbar>
-
-    <v-main
-      color="primary"
-      :style="{ background: $vuetify.theme.themes['light'].background }"
-    >
-      <router-view></router-view>
-    </v-main>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import Navbar from "./shared/components/Navbar.vue";
+// import Navbar from "./shared/components/Navbar.vue";
+// <Navbar></Navbar>
+
+//     <v-main
+//       color="primary"
+//       :style="{ background: $vuetify.theme.themes['light'].background }"
+//     >
+//       <router-view></router-view>
+//     </v-main>
 
 export default {
   name: "App",
 
   components: {
-    Navbar,
+    // Navbar,
   },
   data: () => ({
     //
