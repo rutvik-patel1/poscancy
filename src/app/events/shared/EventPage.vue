@@ -1,17 +1,16 @@
 <template>
   <v-container
-  :class="{
-          'px-0': $vuetify.breakpoint.smAndDown,
-          'px-15': $vuetify.breakpoint.mdAndUp,
-        }"
+    :class="{
+      'px-0': $vuetify.breakpoint.smAndDown,
+      'px-15': $vuetify.breakpoint.mdAndUp,
+    }"
   >
     <v-card :loading="loading" class="mx-1 my-1 pa-4 pb-1">
       <v-row>
         <v-col cols="7" lg="10" class="pl-4">
           <div class="d-block font-weight-bold text-h5" style="color: #0a66c2">
-            Annual Goa Trip
+            {{ title }}
           </div>
-          
         </v-col>
         <v-col cols="5" lg="2">
           <v-btn depressed>
@@ -22,39 +21,33 @@
       </v-row>
       <v-row class="mb-1">
         <v-col class="pl-4">
-          <div class="d-block text-caption">15 Sep 2022 to 21 Sep 2022</div>
+          <div class="d-block text-caption">{{ time }}</div>
         </v-col>
       </v-row>
       <v-img
         height="250"
         max-width="400"
         class="rounded-lg"
-        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+        :src="media"
       ></v-img>
 
       <v-card-text class="px-1">
         <div class="text--primary text-justify">
-          <strong>1 Sep 2022 :</strong>
-          tional institution."relating to or dependent on charity; charitable
-          "an eleemosynary educational institution."relating to or dependent on
-          charity; charitable "an eleemosynary educational institution."relating
-          to or dependent on charity; charitable "an eleemosynary educational
-          institution."relating to or dependent on charity; charitable
+          <strong>{{ time1 }}:</strong>
+          {{ desc1 }}{{ desc1 }}
           <br />
           <br />
-          <strong>5 Sep 2022 :</strong>
-          tional institution."relating to or dependent on charity; charitable
-          "an eleemosynary educational institution."relating to or dependent on
-          charity; charitable "an eleemosynary educational institution."relating
-          to or dependent on charity; charitable "an eleemosynary educational
-          institution."relating to or dependent on charity; charitable
+          <strong>{{ time2 }} :</strong>
+          {{ desc2 }} <br />
+          {{ desc1 }}
         </div>
       </v-card-text>
 
       <v-divider class="mb-7"></v-divider>
 
-      <v-row justify="center"
-      :class="{
+      <v-row
+        justify="center"
+        :class="{
           'pa-0': $vuetify.breakpoint.smAndDown,
           'pa-5': $vuetify.breakpoint.mdAndUp,
         }"
@@ -184,6 +177,15 @@ export default {
     CommentSection,
   },
   data: () => ({
+    title: "Annual Goa Trip",
+    time: "15 Sep 2022 to 21 Sep 2022",
+    media: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
+    time1: "1 Sep 2022",
+    time2: "5 Sep 2022",
+    desc1:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt expedita eaque minima atque! Rerum delectus iusto repellat, quae a et quibusdam quod cum maiores odit laboriosam, quia vitae distinctio illum?",
+    desc2:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt expedita eaque minima atque! Rerum delectus iusto repellat, quae a et quibusdam quod cum maiores odit laboriosam, quia vitae distinctio illum?",
     valid: true,
     name: "",
     nameRules: [

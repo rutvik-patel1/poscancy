@@ -102,7 +102,9 @@
             </li>
           </ul>
         </div>
-        <v-btn color="primary" width="100%" @click="previewForm">Preview Form</v-btn>
+        <v-btn color="primary" width="100%" @click="previewForm"
+          >Preview Form</v-btn
+        >
       </v-col>
     </v-row>
   </div>
@@ -153,8 +155,8 @@ export default {
     },
   },
   methods: {
-    deleteSchema(id){
-        this.$delete(this.schema2,id)
+    deleteSchema(id) {
+      this.$delete(this.schema2, id);
     },
     addField() {
       console.log("clicked");
@@ -204,11 +206,11 @@ export default {
         this.fieldName.name,
         JSON.parse(JSON.stringify(schemaObject))
       );
-      this.fieldName.name = ""
-      this.fieldName.type = ""
-      this.fieldName.description = ""
-      this.fieldName.title = ""
-      this.customElement = ""
+      this.fieldName.name = "";
+      this.fieldName.type = "";
+      this.fieldName.description = "";
+      this.fieldName.title = "";
+      this.customElement = "";
     },
     deleteFiled(id) {
       console.log(id);
