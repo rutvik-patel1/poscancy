@@ -1,6 +1,6 @@
 <template>
   <div class="newsfeed-container">
-    <div  v-if="mobile">
+    <div v-if="mobile">
       <v-row>
         <v-col cols="12" xl="8" lg="8" md="8" sm="12" xs="12">
           <Article></Article>
@@ -33,15 +33,15 @@ export default {
   },
   data: () => ({}),
   computed: {
-  mobile() {
-    return this.$vuetify.breakpoint.xs;
+    mobile() {
+      return this.$vuetify.breakpoint.xs;
+    },
   },
-}
 };
 </script>
 
 <style scoped>
 .newsfeed-container {
-  padding: 20px;
+  padding: 5px;
 }
 </style>

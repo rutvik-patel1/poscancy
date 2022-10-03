@@ -1,5 +1,12 @@
 <template>
-  <v-card :loading="loading" class="mx-5 my-12 pa-4 pb-0">
+  <v-card
+    :loading="loading"
+    class="pa-4 pb-0"
+    :class="{
+      'mx-1 my-6': $vuetify.breakpoint.smAndDown,
+      'mx-5 my-12': $vuetify.breakpoint.mdAndUp,
+    }"
+  >
     <v-row class="mb-1">
       <v-col cols="2" lg="1">
         <v-avatar size="45px" v-bind="attrs" v-on="on">
@@ -10,13 +17,13 @@
         <div class="d-block font-weight-bold">{{ author }}</div>
         <div class="d-block text-caption">{{ time }}</div>
       </v-col>
-      <v-col cols="5" lg="3">
+      <v-col cols="4" lg="3">
         <v-btn depressed>
           Follow
           <v-icon>add</v-icon>
         </v-btn>
       </v-col>
-      <v-col cols="1" lg="1">
+      <v-col cols="2" lg="1">
         <v-menu v-model="showMenu" absolute offset-y style="max-width: 600px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn depressed icon v-bind="attrs" v-on="on">
