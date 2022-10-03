@@ -1,34 +1,26 @@
 <template>
-  <v-card class="pa-4 pb-0"
-  :class="{
-          'mx-1 my-6': $vuetify.breakpoint.smAndDown,
-          'mx-5 my-12': $vuetify.breakpoint.mdAndUp,
-        }"
+  <v-card
+    class="pa-4 pb-0"
+    :class="{
+      'mx-1 my-6': $vuetify.breakpoint.smAndDown,
+      'mx-5 my-12': $vuetify.breakpoint.mdAndUp,
+    }"
   >
     <v-row>
       <v-col cols="12" lg="5">
-        <v-img
-          height="250"
-          width="230"
-          class="rounded-lg"
-          src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-        ></v-img>
+        <v-img height="250" width="230" class="rounded-lg" :src="media"></v-img>
       </v-col>
       <v-col cols="12" lg="7">
-        <p class="text--primary text-h5">Annual Goa Trip</p>
-        <div>15 sept - 21 sep 2022</div>
+        <p class="text--primary text-h5">{{ title }}</p>
+        <div>{{ date }}</div>
         <v-card-text class="px-1">
-          <div
-            class="text--primary text-justify mb-2"
-          >
-            relating to or dependent on charity; charitable "an eleemosynary
-            educational institution."relating to or dependent on charity;
-            charitable "an eleemosynary educational institution."relating to or
-            dependent on "an eleemosynary educational institution."
+          <div class="text--primary text-justify mb-2">
+            {{ caption }}
           </div>
           <p>
-            <v-btn depressed outlined color="primary">See More
-                <v-icon color="primary">mdi-chevron-right</v-icon>
+            <v-btn depressed outlined color="primary" to="event/1"
+              >See More
+              <v-icon color="primary">mdi-chevron-right</v-icon>
             </v-btn>
           </p>
         </v-card-text>
@@ -38,7 +30,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      title: "Annual Goa Trip",
+      date: "15 sept - 21 sep 2022",
+      media: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
+      caption:
+        "relating to or dependent on charity charitable an eleemosynary relating to or \n dependent on charity charitable an eleemosynary educational \n institution relating to or dependent on charity charitable an eleemosynary educational institution relating to or dependent on \n charity charitable",
+    };
+  },
+};
 </script>
 
 <style>
