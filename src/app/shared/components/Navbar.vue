@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="white"  clipped-left elevation="1" >
+    <v-app-bar app color="white" clipped-left elevation="1">
       <v-btn text class="hidden-md-and-up ma-0" @click="click">
         <v-icon class="ma-0">menu</v-icon>
       </v-btn>
@@ -20,15 +20,7 @@
           width="40"
         />
         <div
-          class="
-            transition-swing
-            shrink
-            mt-1
-            hidden-sm-and-down
-            primary--text
-            font-weight-regular
-            text-h5
-          "
+          class="transition-swing shrink mt-1 hidden-sm-and-down primary--text font-weight-regular text-h5"
         >
           POSCANCY
         </div>
@@ -64,7 +56,7 @@
             />
           </v-avatar>
           <v-btn class="hidden-sm-and-down" flat text v-bind="attrs" v-on="on">
-            Rutvik Patel
+            Robert john
           </v-btn>
         </template>
         <v-list>
@@ -131,7 +123,11 @@ export default {
         { title: "Admin Users", path: "/admin/users", icon: "person" },
         { title: "Profile", path: "/profile", icon: "person" },
         { title: "Event Create", path: "/admin/event/create", icon: "create" },
-        { title: "Event Response", path: "/admin/event/1/response", icon:"event" },
+        {
+          title: "Event Response",
+          path: "/admin/event/1/response",
+          icon: "event",
+        },
         { title: "chatroom", path: "/community/chat", icon: "chat" },
         { title: "Login", path: "/login", icon: "chat" },
         { title: "Rest Password", path: "/reset", icon: "chat" },
@@ -159,5 +155,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

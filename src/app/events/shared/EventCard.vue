@@ -1,5 +1,5 @@
 <template>
-  <v-card :loading="loading" class="pa-4 pb-0"
+  <v-card class="pa-4 pb-0"
   :class="{
           'mx-1 my-6': $vuetify.breakpoint.smAndDown,
           'mx-5 my-12': $vuetify.breakpoint.mdAndUp,

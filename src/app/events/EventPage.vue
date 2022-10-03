@@ -1,6 +1,6 @@
 <template>
   <v-container class="px-15">
-    <v-card :loading="loading" class="mx-5 my-12 pa-4 pb-1">
+    <v-card class="mx-5 my-12 pa-4 pb-1">
       <v-row class="mb-1">
         <v-col cols="4" lg="10" class="pl-4">
           <div class="d-block font-weight-bold text-h5" style="color: #0a66c2">
