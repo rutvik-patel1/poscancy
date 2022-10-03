@@ -5,18 +5,18 @@
       'px-15': $vuetify.breakpoint.mdAndUp,
     }"
   >
-    <v-card :loading="loading" class="mx-1 my-1 pa-4 pb-1">
+    <v-card :loading="loading" class="pa-4 pb-1 ma-auto" style="max-width:550px">
       <v-row class="mb-1">
         <v-col cols="2" lg="1" sm="1">
           <v-avatar size="45px" v-bind="attrs" v-on="on">
             <img alt="Avatar" :src="post.avatar" />
           </v-avatar>
         </v-col>
-        <v-col cols="5" lg="9" sm="8" class="pl-4">
+        <v-col cols="5" lg="7" sm="8" class="pl-4">
           <div class="d-block font-weight-bold">{{ post.author }}</div>
           <div class="d-block text-caption">{{ post.timeStamp }}</div>
         </v-col>
-        <v-col cols="5" lg="2" sm="1">
+        <v-col cols="5" lg="4" sm="1">
           <v-btn depressed>
             Follow
             <v-icon>add</v-icon>
