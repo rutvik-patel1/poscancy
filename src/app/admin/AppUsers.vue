@@ -60,7 +60,7 @@
   }
   </script>
 <style css scoped>
-    .admin{  background-color: #ECEEFD; height:100%;}
+    .admin{  background-color: #ECEEFD; height:100%; width: 100%;}
     .admin-header{ background-color:#0A66C2; border-radius:0.6em; margin: auto;}
     thead { background-color:darkgray;}
     th,td { border: 1px solid gray;}
