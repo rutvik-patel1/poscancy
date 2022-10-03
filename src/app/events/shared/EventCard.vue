@@ -8,7 +8,12 @@
   >
     <v-row>
       <v-col cols="12" lg="5">
-        <v-img height="250" width="230" class="rounded-lg" :src="media"></v-img>
+        <v-img
+          height="250"
+          max-width="100%"
+          class="rounded-lg"
+          :src="media"
+        ></v-img>
       </v-col>
       <v-col cols="12" lg="7">
         <p class="text--primary text-h5">{{ title }}</p>

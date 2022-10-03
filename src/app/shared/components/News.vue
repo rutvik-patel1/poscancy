@@ -1,10 +1,16 @@
 <template>
-  <v-card class="pa-2">
-    <h2 class="mt-4">
-      <v-badge color="red" content="6"> <v-icon>mdi-bullhorn-variant-outline</v-icon> </v-badge>
-      <span class="mx-4"
-        > News & Updates</span
-      >
+  <v-card
+    class="pa-2"
+    :class="{
+      'mx-1 my-2': $vuetify.breakpoint.smAndDown,
+      'mx-2 my-8 ml-0': $vuetify.breakpoint.mdAndUp,
+    }"
+  >
+    <h2 class="mt-1">
+      <v-badge color="red" content="6">
+        <v-icon>mdi-bullhorn-variant-outline</v-icon>
+      </v-badge>
+      <span class="mx-4"> News & Updates</span>
     </h2>
 
     <v-list three-line>
