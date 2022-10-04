@@ -8,7 +8,12 @@
       </div>
 
       <div class="d-flex flex-row flex-wrap">
-        <v-card class="ma-1 pa-4" width="330" v-for="item in ongoing" :key="item">
+        <v-card class="ma-1 pa-4"
+        :class="{
+          '': $vuetify.breakpoint.smAndDown,
+          'ma-4': $vuetify.breakpoint.mdAndUp,
+        }" 
+        width="330" v-for="item in ongoing" :key="item">
           <v-container>
             <v-row>
               <v-col
@@ -63,7 +68,12 @@
       </div>
 
       <div class="d-flex flex-row flex-wrap">
-        <v-card class="ma-1 pa-4" width="330" v-for="item in upcoming" :key="item">
+        <v-card class="ma-1 pa-4"
+        :class="{
+          '': $vuetify.breakpoint.smAndDown,
+          'ma-4': $vuetify.breakpoint.mdAndUp,
+        }" 
+        width="330" v-for="item in upcoming" :key="item">
           <v-container>
             <v-row>
               <v-col

@@ -4,7 +4,7 @@
     class="pa-4 pb-0"
     :class="{
       'mx-1 my-6': $vuetify.breakpoint.smAndDown,
-      'mx-5 my-12': $vuetify.breakpoint.mdAndUp,
+      'mx-4 my-4': $vuetify.breakpoint.mdAndUp,
     }"
   >
     <v-row class="mb-1">

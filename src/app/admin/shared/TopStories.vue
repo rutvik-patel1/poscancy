@@ -6,13 +6,23 @@
       <v-divider></v-divider>
     </div>
 
-    <div class="d-flex flex-row"
-    :class="{
-      'flex-wrap': $vuetify.breakpoint.smAndDown,
-    }"
-    >
-      <post-card></post-card>
-      <post-card></post-card>
+    <div 
+    
+    ><v-row>
+      
+        <v-col >
+          <post-card></post-card>
+        </v-col>
+        <v-col>
+          <post-card></post-card>
+        </v-col>
+        <v-col>
+          <post-card></post-card>
+        </v-col>
+        <v-col>
+          <post-card></post-card>
+        </v-col>
+    </v-row>
     </div>
   </div>
 </template>
