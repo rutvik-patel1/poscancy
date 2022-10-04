@@ -1,22 +1,27 @@
 
 <template>
-  <v-card class="pa-6">
+  <v-card
+    class="pa-6"
+    :class="{
+      'mx-1 my-3': $vuetify.breakpoint.smAndDown,
+      'mx-5 my-8': $vuetify.breakpoint.mdAndUp,
+    }"
+  >
     <v-row>
       <v-col cols="3" xl="2" lg="2" md="2" sm="3" xs="3">
-        <div class="d-flex justify-center"> 
+        <div class="d-flex justify-center">
           <v-avatar
-          :size="size"
-          :class="{
-            'ma-1 pa-0': $vuetify.breakpoint.smAndDown,
-            'ma-0 pa-6': $vuetify.breakpoint.mdAndUp,
-          }"
-        >
-          <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
-        </v-avatar>
+            :size="size"
+            :class="{
+              'ma-1 pa-0': $vuetify.breakpoint.smAndDown,
+              'ma-0 pa-6': $vuetify.breakpoint.mdAndUp,
+            }"
+          >
+            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+          </v-avatar>
         </div>
-       
       </v-col>
-      <v-col  cols="9" xl="10" lg="10" md="10" sm="9" xs="9">
+      <v-col cols="9" xl="10" lg="10" md="10" sm="9" xs="9">
         <v-row class="mx-1">
           <v-textarea
             label="Write Something ..."
@@ -27,11 +32,11 @@
 
         <v-row class="ma-0">
           <v-col cols="6" xl="6" lg="6" md="6" sm="6" xs="6">
-                <v-btn outlined><v-icon>mdi-image-outline</v-icon> Photo</v-btn>
-              </v-col>
-              <v-col cols="6" xl="6" lg="6" md="6" sm="6" xs="6">
-                <v-btn outlined><v-icon>mdi-video-outline</v-icon> Video</v-btn>
-              </v-col>
+            <v-btn outlined><v-icon>mdi-image-outline</v-icon> Photo</v-btn>
+          </v-col>
+          <v-col cols="6" xl="6" lg="6" md="6" sm="6" xs="6">
+            <v-btn outlined><v-icon>mdi-video-outline</v-icon> Video</v-btn>
+          </v-col>
         </v-row>
       </v-col>
     </v-row>

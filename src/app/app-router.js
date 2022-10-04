@@ -36,18 +36,24 @@ const appRoutes = [
     name:'CreateEvent',
     component: () => import('./admin/shared/CreateEvent.vue')
   },
+  {
+    path:'/:pathMatch(.*)*',
+    name:'404',
+    component:() => import('./shared/components/NotFound.vue')
 
+  }
 ]
 
 const routes = [
   ...channelRoutes,
-  ...appRoutes,
   ...eventsRoutes,
   ...postsRoutes,
   ...profileRoutes,
   ...adminRoutes,
   ...authRoutes,
-  ...communityRoutes
+  ...communityRoutes,
+  ...appRoutes,
+  
 ]
 const router = new VueRouter({
   mode: 'history',
