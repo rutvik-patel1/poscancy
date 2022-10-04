@@ -121,6 +121,7 @@ export default {
         { title: "Detailed Event", path: "/event/1", icon: "event" },
         { title: "Event Calander", path: "/event/calender", icon: "event" },
         { title: "Admin Users", path: "/admin/users", icon: "person" },
+        { title: "Admin Dashboard", path: "/admin/dashboard", icon: "person" },
         { title: "Profile", path: "/profile", icon: "person" },
         { title: "Event Create", path: "/admin/event/create", icon: "create" },
         {
