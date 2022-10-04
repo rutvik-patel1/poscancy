@@ -68,7 +68,7 @@
     <v-navigation-drawer v-model="sidebar" app clipped>
       <v-list nav dense>
         <v-list-item-group v-model="selectedItem" color="primary">
-          <v-list-item v-for="(item, i) in menuItems" :key="i" :to="item.path">
+          <v-list-item v-for="(item, i) in menuItems" :key="i" :to="item.path" exact-path>
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
@@ -91,7 +91,7 @@
             </v-list-item-content>
           </template>
 
-          <v-list-item v-for="child in item.items" :key="child.title" :to="child.path" exact>
+          <v-list-item v-for="child in item.items" :key="child.title" :to="child.path" exact-path >
             <v-list-item-content>
               <v-list-item-title v-text="child.title"></v-list-item-title>
             </v-list-item-content>

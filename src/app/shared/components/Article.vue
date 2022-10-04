@@ -32,11 +32,25 @@
 
         <v-row class="ma-0">
           <v-col cols="6" xl="6" lg="6" md="6" sm="6" xs="6">
-            <v-btn outlined><v-icon>mdi-image-outline</v-icon> Photo</v-btn>
+            <v-btn outlined color="primary" @click="chooseFile"
+              ><v-icon>mdi-image-outline</v-icon>{{ selectedFile?.name || 'PHOTO' }}</v-btn
+            >
+            <input
+              ref="uploader"
+              class="d-none"
+              type="file"
+              accept="image/*"
+              @change="onFileChange"
+            />
           </v-col>
           <v-col cols="6" xl="6" lg="6" md="6" sm="6" xs="6">
-            <v-btn outlined><v-icon>mdi-video-outline</v-icon> Video</v-btn>
+            <v-btn outlined
+           color="primary"
+            @click="chooseFile"
+              ><v-icon>mdi-video-outline</v-icon> Video</v-btn
+            >
           </v-col>
+          <v-col v-if="selectedFile"><v-btn depressed color="primary">Post<v-icon class="material-icons ml-1">send</v-icon></v-btn></v-col>
         </v-row>
       </v-col>
     </v-row>
@@ -48,8 +62,15 @@ export default {
   name: "Article",
   data: () => ({
     size: 74,
+    selectedFile: null,
   }),
   methods: {
+    chooseFile() {
+      this.$refs.uploader.click();
+    },
+    onFileChange(e) {
+      this.selectedFile = e.target.files[0];
+    },
     onResize() {
       if (window.innerWidth > 1400) {
         this.size = 74;
