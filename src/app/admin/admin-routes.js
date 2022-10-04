@@ -2,13 +2,28 @@ import Users from './AppUsers.vue'
 import Dashboard from './Dashboard.vue'
 
 const adminRoutes = [
-    {   path: '/admin/users',
+    {   path: 'users',
         name: 'users',
         component: Users
     },
-    {   path: '/admin/dashboard',
+    {   path: 'dashboard',
         name: 'dashboard',
         component: Dashboard
     },
+    {
+        path:'event',
+        name:'AdminEvent',
+        component: () => import('./shared/AdminEvent.vue')
+      },
+      {
+        path:'event/create',
+        name:'CreateEvent',
+        component: () => import('./shared/CreateEvent.vue')
+      },
+      {
+        path:'event/:id/response',
+        name:'AdminEvent',
+        component: () => import('./shared/EventResponse.vue')
+      },
 ]
 export default adminRoutes

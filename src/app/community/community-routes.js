@@ -1,6 +1,6 @@
 const communityRoutes = [
     {
-        path: '/community/chat',
+        path: '/community/chat/:id',
         name: 'Chat',
         component: () => import('./poscancyChat.vue')
       },

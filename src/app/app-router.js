@@ -1,59 +1,74 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { profileRoutes } from './profile'
-import Home from './shared/components/MainContainer.vue'
-import { eventsRoutes } from './events'
-import { postsRoutes } from './posts'
-import { channelRoutes } from './channel'
-import adminRoutes from './admin/admin-routes.js'
+import profileRoutes from './profile/profile-routes'
+import channelRoutes from './channel/channel-routes'
+import eventsRoutes from './events/events-routes'
+import adminRoutes from './admin/admin-routes'
+import communityRoutes from './community/community-routes'
+import postsRoutes from './posts/posts-routes'
 import authRoutes from './auth/auth-routes.js'
-import communityRoutes from './community/community-routes.js'
+
+
 Vue.use(VueRouter)
 
 const appRoutes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: ()=> import('./shared/components/Home.vue'),
+    children:[
+      {
+        path:'',
+        redirect: { name: 'Login' },
+      },
+      ...authRoutes,
+      {
+        path: 'admin',
+        name: 'Admin',
+        component: ()=> import('./shared/components/Home.vue'),
+        children:[
+            {
+            path: '',
+            name: 'AdminHome',
+            component: () => import('./admin/AdminHome.vue'),
+            children:[
+              ...adminRoutes,
+              ...channelRoutes,
+              
+            ]
+            }
+        ]
+      },
+      {
+        path: '',
+        name: 'homepage',
+        redirect: { name: 'newsfeed' },
+        component: () => import('./shared/components/HomeView.vue'),
+        children:[
+          {
+            path: '/newsfeed',
+            name: 'newsfeed',
+            component: () => import('./shared/components/MainContainer.vue'),
+          },
+          ...profileRoutes,
+          ...eventsRoutes,
+          ...postsRoutes,
+          ...communityRoutes ,
+          {
+            path:'/:pathMatch(.*)*',
+            name:'404',
+            component:() => import('./shared/components/NotFound.vue')
+          },
+        ]
+      },
+      
+    ]
   },
-  {
-    path: '/newsfeed',
-    name: 'NewsFeed',
-    component: () => import('./shared/components/MainContainer.vue')
-  },
-  {
-    path:'/admin/event/',
-    name:'AdminEvent',
-    component: () => import('./admin/shared/AdminEvent.vue')
-  },
-  {
-    path:'/admin/event/:id/response',
-    name:'AdminEvent',
-    component: () => import('./admin/shared/EventResponse.vue')
-  },
-  {
-    path:'/admin/event/create',
-    name:'CreateEvent',
-    component: () => import('./admin/shared/CreateEvent.vue')
-  },
-  {
-    path:'/:pathMatch(.*)*',
-    name:'404',
-    component:() => import('./shared/components/NotFound.vue')
-
-  }
+  
 ]
 
 const routes = [
-  ...channelRoutes,
-  ...eventsRoutes,
-  ...postsRoutes,
-  ...profileRoutes,
-  ...adminRoutes,
-  ...authRoutes,
-  ...communityRoutes,
   ...appRoutes,
-  
 ]
 const router = new VueRouter({
   mode: 'history',

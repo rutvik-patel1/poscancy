@@ -1,5 +1,8 @@
 <template>
-  <div>
+    
+    <div>
+        <!-- <router-view></router-view> -->
+        <div>
     <v-app-bar app color="white" clipped-left elevation="1">
       <v-btn text class="hidden-md-and-up ma-0" @click="click">
         <v-icon class="ma-0">menu</v-icon>
@@ -15,7 +18,7 @@
           alt="Vuetify Logo"
           class="shrink mr-1"
           contain
-          :src="require('../../../assets/poscancy.svg')"
+          :src="require('../../assets/poscancy.svg')"
           transition="scale-transition"
           width="40"
         />
@@ -78,32 +81,23 @@
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
-
-        <v-list-group
-          v-for="item in items"
-          :key="item.title"
-          :prepend-icon="item.action"
-        
-        >
-          <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title"></v-list-item-title>
-            </v-list-item-content>
-          </template>
-
-          <v-list-item v-for="child in item.items" :key="child.title" :to="child.path" exact>
-            <v-list-item-content>
-              <v-list-item-title v-text="child.title"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-group>
       </v-list>
     </v-navigation-drawer>
   </div>
+        <v-main
+          color="primary"
+          :style="{ background: $vuetify.theme.themes['light'].background }"
+        >
+          <router-view :key="$route.fullPath"></router-view>
+        </v-main>
+    </div>
+
 </template>
 
 <script>
+
 export default {
+  name: "App",
   data() {
     return {
       sidebar: this.$vuetify.breakpoint.smAndDown ? false : true,
@@ -112,22 +106,23 @@ export default {
         ["Settings", "mdi-cog-outline"],
       ],
       selectedItem: 0,
-      selectedItem2: 0,
+      selectedItem2: null,
       menuItems: [
-        { title: "Newsfeed", path: "/newsfeed", icon: "home" },
-        { title: "Profile", path: "/profile", icon: "person" },
-        { title: "Events", path: "/event", icon: "event" },
-        { title: "Event Calander", path: "/event/calender", icon: "event" },
+        
+        { title: "Admin Dashboard", path: "/admin/dashboard", icon: "person" },
+        { title: "Admin Users", path: "/admin/users", icon: "people" },
+        { title: "Event Create", path: "/admin/event/create", icon: "create" },
+        { title: "Event Response", path: "/admin/event/1/response", icon: "event"},
       ],
       items: [
         {
           action: "people",
           active: true,
           items: [
-            { title: "#Books" , path:'/community/chat/1' },
-            { title: "#Finance",path:'/community/chat/2' },
-            { title: "#Movies",path:'/community/chat/3' },
-            { title: "#Navratri2022",path:'/community/chat/4' },
+            { title: "#Books" },
+            { title: "#Finance" },
+            { title: "#Movies" },
+            { title: "#Navratri2022" },
           ],
           title: "community",
         },
@@ -142,4 +137,10 @@ export default {
 };
 </script>
 
-<style></style>
+
+<!-- <style>
+  *{
+    background-color: #ECEEFD;
+  }
+</style> -->
+
