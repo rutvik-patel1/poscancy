@@ -15,7 +15,7 @@
     </v-row>
     <v-row class="mt-2 mb-6">
         <v-col style="text-align:center;">
-            <v-btn to="/" color="primary">Go To Home</v-btn>
+            <v-btn :to="{ name: 'newsfeed'  }" color="primary">Go To Home</v-btn>
         </v-col>
     </v-row>
   </v-card>

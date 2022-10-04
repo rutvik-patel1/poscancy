@@ -22,7 +22,7 @@ const adminRoutes = [
       },
       {
         path:'event/:id/response',
-        name:'AdminEvent',
+        name:'AdminEventResponse',
         component: () => import('./shared/EventResponse.vue')
       },
 ]

@@ -1,7 +1,7 @@
 const eventsRoutes = [
     {
         path: '/event',
-        name: 'Home',
+        name: 'EventContainer',
         component: () => import('./EventContainer.vue')
     },
     {

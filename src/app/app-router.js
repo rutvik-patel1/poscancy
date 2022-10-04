@@ -14,22 +14,15 @@ Vue.use(VueRouter)
 const appRoutes = [
   {
     path: '/',
-    name: 'Home',
     component: ()=> import('./shared/components/Home.vue'),
     children:[
-      {
-        path:'',
-        redirect: { name: 'Login' },
-      },
       ...authRoutes,
       {
         path: 'admin',
-        name: 'Admin',
         component: ()=> import('./shared/components/Home.vue'),
         children:[
             {
             path: '',
-            name: 'AdminHome',
             component: () => import('./admin/AdminHome.vue'),
             children:[
               ...adminRoutes,
@@ -61,7 +54,6 @@ const appRoutes = [
           },
         ]
       },
-      
     ]
   },
   
