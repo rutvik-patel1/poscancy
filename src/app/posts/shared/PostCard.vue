@@ -8,12 +8,12 @@
     }"
   >
     <v-row class="mb-1">
-      <v-col cols="2" lg="1">
+      <v-col cols="2" lg="2">
         <v-avatar size="45px" v-bind="attrs" v-on="on">
           <img alt="Avatar" :src="avatar" />
         </v-avatar>
       </v-col>
-      <v-col cols="4" lg="7" class="pl-4">
+      <v-col cols="4" lg="6" class="pl-4">
         <div class="d-block font-weight-bold">{{ author }}</div>
         <div class="d-block text-caption">{{ time }}</div>
       </v-col>
