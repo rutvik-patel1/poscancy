@@ -3,11 +3,11 @@
     <v-card class="mx-1 my-2 pa-2 text-h5 primary" style="color: white"
       >Ongoing Events</v-card
     >
-    <event-card></event-card>
+    <event-card eventtype="ongoing"></event-card>
     <v-card class="mx-1 my-3 pa-2 text-h5 primary" style="color: white"
       >Past Events</v-card
     >
-    <event-card></event-card>
+    <event-card eventtype="past"></event-card>
   </div>
 </template>
 

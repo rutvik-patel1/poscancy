@@ -32,9 +32,9 @@ export default new Vuex.Store({
       commit('setMsg',message)
       commit('setType',type)
       commit('alertState')
-      setTimeout(function(){
+      setTimeout(() => {
         commit('resetState')
-      },2000)
+      },3000)
     }
   },
   modules: {
