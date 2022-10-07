@@ -108,8 +108,14 @@
           </v-row>
           <v-row class="mt-2 mr-2">
             <v-col>
-              <div style="height: 230px; border: 1px solid gray; margin: 10px; background-color: aliceblue;">
-              </div>
+              <div
+                style="
+                  height: 230px;
+                  border: 1px solid gray;
+                  margin: 10px;
+                  background-color: aliceblue;
+                "
+              ></div>
             </v-col>
           </v-row>
         </v-col>

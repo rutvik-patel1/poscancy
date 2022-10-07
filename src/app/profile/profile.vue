@@ -1,18 +1,25 @@
 <template>
-  <div :class="{
-          'ma-0 pa-2': $vuetify.breakpoint.smAndDown,
-          'ma-0 pa-6': $vuetify.breakpoint.mdAndUp,
-        }">
+  <div
+    :class="{
+      'ma-0 pa-2': $vuetify.breakpoint.smAndDown,
+      'ma-0 pa-6': $vuetify.breakpoint.mdAndUp,
+    }"
+  >
     <UserPhoto></UserPhoto>
     <div class="mt-4">
-      <v-tabs v-model="activeTab" grow>
-        <v-tab v-for="tab of tabs" :key="tab.index" :to="tab.route" exact>
-          
-          {{ tab.name }}
-        </v-tab>
+      <v-tabs  grow>
+        <v-tab> About </v-tab>
+        <v-tab> Friends </v-tab>
+        <v-tab> Photos </v-tab>
 
-        <v-tab-item v-for="tab of tabs" :key="tab.index" :value="tab.route">
-          <router-view></router-view>
+        <v-tab-item> 
+            <AboutVue></AboutVue>
+        </v-tab-item>
+        <v-tab-item> 
+            <FriendsVue></FriendsVue>
+        </v-tab-item>
+        <v-tab-item> 
+            <PhotosVue></PhotosVue>
         </v-tab-item>
       </v-tabs>
     </div>
@@ -21,23 +28,19 @@
 
 <script>
 import UserPhoto from "./shared/components/UserPhoto.vue";
+import AboutVue from "./shared/components/About.vue";
+import FriendsVue from "./friends/Friends.vue";
+import PhotosVue from "./shared/components/Photos.vue";
 export default {
   components: {
     UserPhoto,
+    AboutVue,
+    FriendsVue,
+    PhotosVue
   },
-  data: () => ({
-    activeTab: 0,
-    tabs: [
-      { index: 0, name: "About", route: "/profile" },
-      { index: 1, name: "Friends", route: "/profile/friends" },
-      { index: 2, name: "Photos", route: "/profile/photos" },
-    ],
-  }),
+  data: () => ({}),
 };
 </script>
 
 <style scoped>
-* {
-  background-color: white;
-}
 </style>

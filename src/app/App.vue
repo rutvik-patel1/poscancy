@@ -1,36 +1,36 @@
 <template>
   <v-app>
-    <Navbar></Navbar>
-
-    <v-main
-      color="primary"
-      :style="{ background: $vuetify.theme.themes['light'].background }"
+    <v-alert
+      border="left"
+      dismissible
+      style="z-index: 999; position: fixed; top: 70px; right: 10px"
+      width="400px"
+      :type="type"
+      v-if="isAlert"
+      >{{ message }}</v-alert
     >
-      <router-view></router-view>
-    </v-main>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import Navbar from "./shared/components/Navbar.vue";
-
 export default {
   name: "App",
-
-  components: {
-    Navbar,
+  data() {
+    return {};
   },
-  data: () => ({
-    //
-    sidebar: false,
-  }),
+  computed: {
+    isAlert() {
+      return this.$store.state.showAlert;
+    },
+    type() {
+      return this.$store.state.type;
+    },
+    message() {
+      return this.$store.state.alertMsg;
+    },
+  },
 };
 </script>
 
-
-<!-- <style>
-  *{
-    background-color: #ECEEFD;
-  }
-</style> -->
 

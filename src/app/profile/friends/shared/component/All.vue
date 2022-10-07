@@ -3,8 +3,7 @@
           'ma-0 pa-2': $vuetify.breakpoint.smAndDown,
           'ma-0 pa-4': $vuetify.breakpoint.mdAndUp,
         }">
-    <v-card
-      outlined
+    <div
       class="d-flex justify-space-around mb-6 align-content-center flex-wrap"
     >
       <v-card
@@ -34,7 +33,7 @@
           </v-row>
         </v-container>
       </v-card>
-    </v-card>
+    </div>
   </div>
 </template>
 

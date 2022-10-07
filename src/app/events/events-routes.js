@@ -1,7 +1,7 @@
 const eventsRoutes = [
     {
         path: '/event',
-        name: 'Home',
+        name: 'EventContainer',
         component: () => import('./EventContainer.vue')
     },
     {
@@ -12,7 +12,7 @@ const eventsRoutes = [
     {
         path: '/event/:id',
         name: 'EventPage',
-        component: () => import('./shared/EventPage.vue')
+        component: () => import('./shared/components/EventPage.vue')
     },
 
 ]

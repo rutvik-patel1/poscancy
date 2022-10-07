@@ -1,11 +1,11 @@
 const authRoutes = [
     {
-        path: '/login',
+        path: 'login',
         name: 'login',
         component: ()=> import('./UserLogin.vue')
       },
       {
-        path: '/reset',
+        path: 'reset',
         name: 'reset',
         component: ()=> import('./ResetPass.vue')
       },

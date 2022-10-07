@@ -1,25 +1,29 @@
 <template>
-  <v-card :loading="loading" class="mx-5 my-12 pa-4 pb-0">
+  <v-card
+    :loading="loading"
+    class="pa-4 pb-0"
+    :class="{
+      'mx-1 my-6': $vuetify.breakpoint.smAndDown,
+      'mx-4 my-4': $vuetify.breakpoint.mdAndUp,
+    }"
+  >
     <v-row class="mb-1">
-      <v-col cols="2" lg="1">
-        <v-avatar size="45px" >
-          <img
-            alt="Avatar"
-            src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
-          />
+      <v-col cols="2" lg="2">
+        <v-avatar size="45px" v-bind="attrs" v-on="on">
+          <img alt="Avatar" :src="avatar" />
         </v-avatar>
       </v-col>
-      <v-col cols="4" lg="7" class="pl-4">
-        <div class="d-block font-weight-bold">John Smit</div>
-        <div class="d-block text-caption">1 hr Ago</div>
+      <v-col cols="4" lg="6" class="pl-4">
+        <div class="d-block font-weight-bold">{{ author }}</div>
+        <div class="d-block text-caption">{{ time }}</div>
       </v-col>
-      <v-col cols="5" lg="3">
+      <v-col cols="4" lg="3">
         <v-btn depressed>
           Follow
           <v-icon>add</v-icon>
         </v-btn>
       </v-col>
-      <v-col cols="1" lg="1">
+      <v-col cols="2" lg="1">
         <v-menu v-model="showMenu" absolute offset-y style="max-width: 600px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn depressed icon v-bind="attrs" v-on="on">
@@ -60,23 +64,14 @@
       </v-col>
     </v-row>
 
-    <v-img
-      height="250"
-      class="rounded-lg"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-    ></v-img>
+    <v-img height="250" class="rounded-lg" :src="media"></v-img>
 
     <v-card-text class="px-1">
       <div class="text--primary text-justify">
-        relating to or dependent on charity; charitable "an eleemosynary
-        educational institution."relating to or dependent on charity; charitable
-        "an eleemosynary educational institution."relating to or dependent on
-        charity; charitable "an eleemosynary educational institution."relating
-        to or dependent on charity; charitable "an eleemosynary educational
-        institution."relating to or dependent on charity; charitable
+        {{ caption }}
       </div>
     </v-card-text>
-
+    <v-divider class="mb-2"></v-divider>
     <v-row>
       <v-col align="center">
         <v-btn icon color="primary" tile>
@@ -114,6 +109,13 @@
 export default {
   data() {
     return {
+      avatar: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460",
+      author: "John Smit",
+      time: "John Smit",
+      showMenu:false,
+      media: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
+      caption:
+        "relating to or dependent on charity charitable an eleemosynary educational institution relating to or dependent on charity charitable an eleemosynary educational institution. relating to or \n dependent on charity charitable an eleemosynary educational \n institution relating to or dependent on charity charitable an eleemosynary educational institution relating to or dependent on \n charity charitable",
       items: [
         {
           icon: "delete",

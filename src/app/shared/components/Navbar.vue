@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="white"  clipped-left elevation="1" >
+    <v-app-bar app color="white" clipped-left elevation="1">
       <v-btn text class="hidden-md-and-up ma-0" @click="click">
         <v-icon class="ma-0">menu</v-icon>
       </v-btn>
@@ -20,15 +20,7 @@
           width="40"
         />
         <div
-          class="
-            transition-swing
-            shrink
-            mt-1
-            hidden-sm-and-down
-            primary--text
-            font-weight-regular
-            text-h5
-          "
+          class="transition-swing shrink mt-1 hidden-sm-and-down primary--text font-weight-regular text-h5"
         >
           POSCANCY
         </div>
@@ -62,8 +54,8 @@
               src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
             />
           </v-avatar>
-          <v-btn class="hidden-sm-and-down" text v-bind="attrs" v-on="on">
-            Rutvik Patel
+          <v-btn class="hidden-sm-and-down" flat text v-bind="attrs" v-on="on">
+            Robert john
           </v-btn>
         </template>
         <v-list>
@@ -75,7 +67,7 @@
     <v-navigation-drawer v-model="sidebar" app clipped>
       <v-list nav dense>
         <v-list-item-group v-model="selectedItem" color="primary">
-          <v-list-item v-for="(item, i) in menuItems" :key="i" :to="item.path">
+          <v-list-item v-for="(item, i) in menuItems" :key="i" :to="item.path" exact-path>
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
@@ -89,9 +81,8 @@
         <v-list-group
           v-for="item in items"
           :key="item.title"
-          v-model="selectedItem2"
           :prepend-icon="item.action"
-          no-action
+        
         >
           <template v-slot:activator>
             <v-list-item-content>
@@ -99,7 +90,7 @@
             </v-list-item-content>
           </template>
 
-          <v-list-item v-for="child in item.items" :key="child.title">
+          <v-list-item v-for="child in item.items" :key="child.title" :to="child.path" exact-path >
             <v-list-item-content>
               <v-list-item-title v-text="child.title"></v-list-item-title>
             </v-list-item-content>
@@ -120,30 +111,22 @@ export default {
         ["Settings", "mdi-cog-outline"],
       ],
       selectedItem: 0,
-      selectedItem2: null,
+      selectedItem2: 0,
       menuItems: [
         { title: "Newsfeed", path: "/newsfeed", icon: "home" },
-        { title: "Events", path: "/event", icon: "event" },
-        { title: "Detailed Post", path: "/post/1", icon: "event" },
-        { title: "Detailed Event", path: "/event/1", icon: "event" },
-        { title: "Event Calander", path: "/event/calender", icon: "event" },
-        { title: "Admin Users", path: "/admin/users", icon: "person" },
         { title: "Profile", path: "/profile", icon: "person" },
-        { title: "Event Create", path: "/admin/event/create", icon: "create" },
-        { title: "Event Response", path: "/admin/event/1/response", icon:"event" },
-        { title: "chatroom", path: "/community/chat", icon: "chat" },
-        { title: "Login", path: "/login", icon: "chat" },
-        { title: "Rest Password", path: "/reset", icon: "chat" },
+        { title: "Events", path: "/event", icon: "event" },
+        { title: "Event Calander", path: "/event/calender", icon: "event" },
       ],
       items: [
         {
           action: "people",
           active: true,
           items: [
-            { title: "#Books" },
-            { title: "#Finance" },
-            { title: "#Movies" },
-            { title: "#Navratri2022" },
+            { title: "#Books" , path:'/community/chat/1' },
+            { title: "#Finance",path:'/community/chat/2' },
+            { title: "#Movies",path:'/community/chat/3' },
+            { title: "#Navratri2022",path:'/community/chat/4' },
           ],
           title: "community",
         },
@@ -158,5 +141,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

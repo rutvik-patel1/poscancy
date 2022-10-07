@@ -1,7 +1,7 @@
 const postsRoutes = [
     {
         path: '/post/:id',
-        name: 'Home',
+        name: 'PostPage',
         component: () => import('./shared/DetailedPost.vue')
       },
 ]

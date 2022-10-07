@@ -1,19 +1,28 @@
+
 <template>
-  <v-card class="pa-6">
+  <v-card
+    class="pa-6"
+    :class="{
+      'mx-1 my-3': $vuetify.breakpoint.smAndDown,
+      'mx-5 my-8': $vuetify.breakpoint.mdAndUp,
+    }"
+  >
     <v-row>
-      <v-col  cols="12" xl="4" lg="3" md="2" sm="2" xs="2">
-        <v-avatar
-          :size="size"
-          :class="{
-            'ma-1 pa-0': $vuetify.breakpoint.smAndDown,
-            'ma-0 pa-6': $vuetify.breakpoint.mdAndUp,
-          }"
-        >
-          <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
-        </v-avatar>
+      <v-col cols="3" xl="2" lg="2" md="2" sm="3" xs="3">
+        <div class="d-flex justify-center">
+          <v-avatar
+            :size="size"
+            :class="{
+              'ma-1 pa-0': $vuetify.breakpoint.smAndDown,
+              'ma-0 pa-6': $vuetify.breakpoint.mdAndUp,
+            }"
+          >
+            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+          </v-avatar>
+        </div>
       </v-col>
-      <v-col  cols="12" xl="8" lg="9" md="10" sm="10" xs="10">
-        <v-row>
+      <v-col cols="9" xl="10" lg="10" md="10" sm="9" xs="9">
+        <v-row class="mx-1">
           <v-textarea
             label="Write Something ..."
             outlined
@@ -21,30 +30,30 @@
           ></v-textarea>
         </v-row>
 
-        <v-row>
-          <v-col cols="12" xl="6" lg="6" md="6" sm="12" xs="12">
-                <v-btn outlined><v-icon>mdi-image-outline</v-icon> Photo</v-btn>
-              </v-col>
-              <v-col cols="12" xl="6" lg="6" md="6" sm="12" xs="12">
-                <v-btn outlined><v-icon>mdi-video-outline</v-icon> Video</v-btn>
-              </v-col>
+        <v-row class="ma-0">
+          <v-col cols="6" xl="6" lg="6" md="6" sm="6" xs="6">
+            <v-btn outlined color="primary" @click="chooseFile"
+              ><v-icon>mdi-image-outline</v-icon>{{ selectedFile?.name || 'PHOTO' }}</v-btn
+            >
+            <input
+              ref="uploader"
+              class="d-none"
+              type="file"
+              accept="image/*"
+              @change="onFileChange"
+            />
+          </v-col>
+          <v-col cols="6" xl="6" lg="6" md="6" sm="6" xs="6">
+            <v-btn outlined
+           color="primary"
+            @click="chooseFile"
+              ><v-icon>mdi-video-outline</v-icon> Video</v-btn
+            >
+          </v-col>
+          <v-col v-if="selectedFile"><v-btn depressed color="primary">Post<v-icon class="material-icons ml-1">send</v-icon></v-btn></v-col>
         </v-row>
       </v-col>
     </v-row>
-
-    <!-- <v-row>
-      <v-col cols="2"> </v-col>
-      <v-col cols="10">
-        <v-row>
-          <v-col cols="6">
-            <v-btn outlined><v-icon>mdi-image-outline</v-icon> Photo</v-btn>
-          </v-col>
-          <v-col cols="6">
-            <v-btn outlined><v-icon>mdi-video-outline</v-icon> Video</v-btn>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row> -->
   </v-card>
 </template>
 
@@ -53,8 +62,15 @@ export default {
   name: "Article",
   data: () => ({
     size: 74,
+    selectedFile: null,
   }),
   methods: {
+    chooseFile() {
+      this.$refs.uploader.click();
+    },
+    onFileChange(e) {
+      this.selectedFile = e.target.files[0];
+    },
     onResize() {
       if (window.innerWidth > 1400) {
         this.size = 74;
@@ -67,7 +83,7 @@ export default {
       } else if (window.innerWidth <= 768 && window.innerWidth > 576) {
         this.size = 52;
       } else if (window.innerWidth <= 576 && window.innerWidth > 460) {
-        this.size = 42;
+        this.size = 48;
       }
     },
   },
