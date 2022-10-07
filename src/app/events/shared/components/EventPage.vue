@@ -168,7 +168,7 @@
           </v-col>
         </v-row>
 
-        <comment-section></comment-section>
+        <comment-section from="event"></comment-section>
       </v-card>
     </v-container>
   </div>
@@ -181,14 +181,14 @@ html {
 </style>
 
 <script>
-import { GetEventById, GetCommentsByEvent } from "../services/events";
+import { GetEventById } from "../services/events";
 import CommentSection from "../../../posts/shared/CommentSec.vue";
 export default {
   components: {
     CommentSection,
   },
   data: () => ({
-    EventArr: {},
+    EventArr: [],
     valid: true,
     name: "",
     nameRules: [
@@ -204,7 +204,6 @@ export default {
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
     checkbox: false,
   }),
-
   methods: {
     validate() {
       this.$refs.form.validate();
@@ -215,15 +214,11 @@ export default {
     resetValidation() {
       this.$refs.form.resetValidation();
     },
+    
   },
   created() {
     GetEventById(this.$route.params.id).then((res) => {
       this.EventArr = res.data;
-    });
-
-    GetCommentsByEvent(this.$route.params.id).then((res) => {
-      console.log('event comments:')
-      console.log(res.data);
     });
 
   },

@@ -2,7 +2,7 @@
   <v-row>
     <div class="col-12 col-sm-8">
       <article-vue></article-vue>
-      <event-card></event-card>
+      <event-card ></event-card>
       <post-card></post-card>
     </div>
     <div class="col-12 col-sm-4">

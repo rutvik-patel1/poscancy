@@ -110,7 +110,7 @@ export default {
     async login(){
       let res = await login(this.email,this.password);
         console.log(res); 
-        appCookieStorage.set('refresh_token',res.data.access_token);
+        appCookieStorage.set('access_token',res.data.access_token);
         this.$router.push('/');
  
     },

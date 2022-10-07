@@ -94,6 +94,17 @@ export default {
               message: "Loaded all events failed !!!",
             });
           });
+      } else {
+        events()
+          .then((res) => {
+            this.allEventArr = res.data;
+          })
+          .catch(async () => {
+            await this.$store.dispatch("alert", {
+              type: "error",
+              message: "Loaded all events failed !!!",
+            });
+          });
       }
     },
   },
