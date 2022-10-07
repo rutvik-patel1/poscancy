@@ -61,7 +61,7 @@
         </template>
         <v-list>
           <v-list-item> Profile </v-list-item>
-          <v-list-item> Logout </v-list-item>
+          <v-list-item v-on:click="logOut"> Logout </v-list-item>
         </v-list>
       </v-menu>
     </v-app-bar>
@@ -103,6 +103,8 @@
 </template>
 
 <script>
+import { logout } from '../../auth/shared/services/auth';
+import { appCookieStorage } from '../services';
 export default {
   data() {
     return {
@@ -138,6 +140,11 @@ export default {
     click() {
       this.sidebar = !this.sidebar;
     },
+   async logOut(){
+      await logout(appCookieStorage.get('refresh_token'));
+      appCookieStorage.remove('refresh_token');
+      this.$router.push('/login');
+    }
   },
 };
 </script>
