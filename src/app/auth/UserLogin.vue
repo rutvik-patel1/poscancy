@@ -74,6 +74,8 @@
   </v-container>
 </template>
 <script>
+import { appCookieStorage } from '../shared/services';
+import { login } from './shared/services/auth';
 export default {
   data() {
     return {
@@ -99,11 +101,20 @@ export default {
     };
   },
   methods: {
-    validate() {
+    async validate() {
       this.$refs.form.validate();
-      console.log(this.valid);
+      if(this.valid){
+          await this.login();
+        }
     },
-  },
+    async login(){
+      let res = await login(this.email,this.password);
+        console.log(res); 
+        appCookieStorage.set('refresh_token',res.data.access_token);
+        this.$router.push('/');
+ 
+    },
+  }
 };
 </script>
 <style css scoped>
