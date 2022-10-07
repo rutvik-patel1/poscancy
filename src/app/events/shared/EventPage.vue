@@ -1,9 +1,9 @@
 <template>
   <v-container
-  :class="{
-          'px-0': $vuetify.breakpoint.smAndDown,
-          'px-15': $vuetify.breakpoint.mdAndUp,
-        }"
+    :class="{
+      'px-0': $vuetify.breakpoint.smAndDown,
+      'px-15': $vuetify.breakpoint.mdAndUp,
+    }"
   >
     <v-card :loading="loading" class="mx-1 my-1 pa-4 pb-1">
       <v-row>
@@ -11,7 +11,6 @@
           <div class="d-block font-weight-bold text-h5" style="color: #0a66c2">
             Annual Goa Trip
           </div>
-          
         </v-col>
         <v-col cols="5" lg="2">
           <v-btn depressed>
@@ -53,8 +52,9 @@
 
       <v-divider class="mb-7"></v-divider>
 
-      <v-row justify="center"
-      :class="{
+      <v-row
+        justify="center"
+        :class="{
           'pa-0': $vuetify.breakpoint.smAndDown,
           'pa-5': $vuetify.breakpoint.mdAndUp,
         }"
@@ -65,67 +65,15 @@
               >Participation Form</v-expansion-panel-header
             >
             <v-expansion-panel-content>
-              <v-form ref="form" v-model="valid" lazy-validation>
-                <v-text-field
-                  v-model="name"
-                  :rules="nameRules"
-                  label="Name"
-                  required
-                  outlined
-                  dense
-                ></v-text-field>
-
-                <v-text-field
-                  v-model="email"
-                  :rules="emailRules"
-                  label="E-mail"
-                  required
-                  outlined
-                  dense
-                ></v-text-field>
-
-                <v-select
-                  v-model="select"
-                  :items="items"
-                  :rules="[(v) => !!v || 'Item is required']"
-                  label="Item"
-                  required
-                  outlined
-                  dense
-                ></v-select>
-
-                <v-file-input label="File input" outlined dense></v-file-input>
-
-                <v-radio-group
-                  v-model="row"
-                  label="Select mode of transportation:"
-                >
-                  <v-radio label="Option 1" value="radio-1"></v-radio>
-                  <v-radio label="Option 2" value="radio-2"></v-radio>
-                </v-radio-group>
-
-                <v-textarea
-                  outlined
-                  name="textarea"
-                  label="Suggestions"
-                  value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-                ></v-textarea>
-
-                <v-checkbox
-                  v-model="checkbox"
-                  :rules="[(v) => !!v || 'You must agree to continue!']"
-                  label="Do you agree?"
-                  required
-                ></v-checkbox>
-
-                <v-btn
-                  :disabled="!valid"
-                  color="primary"
-                  class="mr-4"
-                  @click="validate"
-                >
-                  Submit!
-                </v-btn>
+              <v-btn @click="show = true">Show</v-btn>
+              <v-form
+                ref="form"
+                v-model="valid"
+                @submit.prevent="submit"
+                v-if="show"
+              >
+                <v-jsf v-model="model" outlined :schema="schema" />
+                <v-btn type="submit">Submit</v-btn>
               </v-form>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -179,11 +127,22 @@ html {
 
 <script>
 import CommentSection from "../../posts/shared/CommentSec.vue";
+import VJsf from "@koumoul/vjsf/lib/VJsf.js";
+import "@koumoul/vjsf/lib/VJsf.css";
+import "@koumoul/vjsf/lib/deps/third-party.js";
 export default {
+  async created() {
+    await fetch("https://poke-api-f63a6-default-rtdb.firebaseio.com/data.json")
+      .then((res) => res.json())
+      .then((res) => (this.schema = res));
+  },
   components: {
     CommentSection,
+    VJsf,
   },
   data: () => ({
+    show: false,
+    model: null,
     valid: true,
     name: "",
     nameRules: [
@@ -201,6 +160,9 @@ export default {
   }),
 
   methods: {
+    submit() {
+      console.log(this.model);
+    },
     validate() {
       this.$refs.form.validate();
     },

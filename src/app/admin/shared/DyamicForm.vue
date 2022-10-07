@@ -11,6 +11,9 @@
           label="Select Input Field"
           dense
         ></v-select>
+
+        
+        <v-text-field dense outlined v-model="fieldName.name" label="Unique field Key (please use underscore for space)" ></v-text-field>
         <div v-if="customElement == 'radio'">
           {{ radioList }}
 
@@ -87,7 +90,7 @@
         <div class="text-h6">Form Field List</div>
         <div
           style="
-            height: 210px;
+            height: 280px;
             overflow: scroll;
             border: 1px solid gray;
             padding-left: 15px;
@@ -176,7 +179,7 @@ export default {
       },
       field: [],
       fieldName: {
-        name: "",
+        name: "fullname",
         type: "string",
         description: "Enter firstname and lastname",
         title: "Enter fullname",
@@ -210,7 +213,7 @@ export default {
     },
     addField() {
       console.log("clicked");
-      this.fieldName.name = Date.now();
+   
       this.field.push(JSON.parse(JSON.stringify(this.fieldName)));
       let schemaObject = {
         type: this.fieldName.type,
