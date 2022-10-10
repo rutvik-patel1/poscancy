@@ -76,8 +76,6 @@ export default {
               message: "Loaded all events failed !!!",
             });
           });
-
-        console.log(this.allEventArr);
       } else if (this.eventtype === "past") {
         events()
           .then((res) => {

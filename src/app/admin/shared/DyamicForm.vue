@@ -102,7 +102,7 @@
             </li>
           </ul>
         </div>
-        <v-btn color="primary" width="100%" @click="previewForm"
+        <v-btn color="primary" width="100%" 
           >Preview Form</v-btn
         >
       </v-col>

@@ -18,7 +18,6 @@
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-text-field
                 v-model="email"
-                :error-messages="errors"
                 label="Email"
                 required
                 outlined
@@ -30,7 +29,6 @@
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-text-field
                 v-model="name"
-                :error-messages="errors"
                 label="Name"
                 required
                 outlined
@@ -42,7 +40,6 @@
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-text-field
                 v-model="phoneNumber"
-                :error-messages="errors"
                 label="Phone Number"
                 required
                 outlined
@@ -54,7 +51,6 @@
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-textarea
                 v-model="address"
-                :error-messages="errors"
                 outlined
                 label="Address"
                 required
@@ -101,7 +97,6 @@
               <v-select
                 v-model="gender"
                 :items="items"
-                :error-messages="errors"
                 label="Gender"
                 data-vv-name="Gender"
                 required
@@ -114,7 +109,6 @@
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-textarea
                 v-model="about"
-                :error-messages="errors"
                 outlined
                 label="About"
                 required
@@ -125,15 +119,10 @@
           <v-row>
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-row justify="space-between">
-                <v-btn @click="edit" outlined color="#0A66C2"
+                <v-btn outlined color="#0A66C2"
                   ><v-icon>mdi-pencil-outline</v-icon> edit
                 </v-btn>
-                <v-btn
-                  class="mr-4 btn-color"
-                  type="submit"
-                  :disabled="invalid"
-                  color="#0A66C2"
-                >
+                <v-btn class="mr-4 btn-color" type="submit" color="#0A66C2">
                   submit
                 </v-btn>
               </v-row>
@@ -152,6 +141,9 @@ export default {
     name: "",
     phoneNumber: "",
     email: "",
+    address: "",
+    gender: "",
+    about: "",
     select: null,
     items: ["Male", "Female", "Trasgender", "Other"],
     checkbox: null,

@@ -9,7 +9,7 @@
     <div class="d-flex flex-row flex-wrap">
       <div 
       v-for="item in items"
-        :key="item">
+        :key="item.name">
         <v-card class="pa-2 ma-4 rounded-xl" outlined>
           <v-container>
             <v-row>

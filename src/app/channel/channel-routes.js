@@ -2,7 +2,7 @@ import Channel from './Channel.vue'
 
 const routes = [
   {
-    path: "/channel",
+    path: "channel",
     name: 'Channel',
     component: Channel,
   },

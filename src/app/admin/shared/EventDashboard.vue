@@ -8,7 +8,7 @@
   
       <div class="d-flex flex-row flex-wrap">
         <div  v-for="event in events"
-        :key="event">
+        :key="event.name">
           <v-card class="pa-2 ma-4 rounded-xl" outlined>
             <v-container>
               <v-row>
