@@ -13,7 +13,7 @@ const GetEventById = (id) => {
 };
 
 const GetCommentsByEvent = (id) => {
-  const url = apiBaseUrl + '/items/event_comment?filter[event_id][_eq]='+ id
+  const url = apiBaseUrl + '/items/event_comment?filter[event_id][_eq]='+ id + '&fields=*.*.*'
   return httpClient.get(url).then(res => res.data);
 };
 

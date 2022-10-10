@@ -29,4 +29,5 @@ class AppStorage {
       }
 }
 const appCookieStorage = new AppStorage(Cookies);
-export { appCookieStorage }
+
+export { appCookieStorage };

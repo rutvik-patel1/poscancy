@@ -1,13 +1,22 @@
 <template>
   <div>
-    <v-row v-for="comment in comments" :key="comment.id">
+    <v-row v-for="comment in CommentArr" :key="comment.id">
       <v-col cols="2" lg="1">
         <v-avatar size="45px" v-bind="attrs" v-on="on">
-          <img alt="Avatar" :src="comment.url" />
+          <img
+            alt="Avatar"
+            :src="
+              `https://a1drqkgw.directus.app/assets/` +
+              comment.user_created.avatar.id
+            "
+          />
         </v-avatar>
       </v-col>
       <v-col cols="4" lg="8" class="pl-4">
-        <div class="d-block font-weight-bold">{{ comment.author }}</div>
+        <div class="d-block font-weight-bold">
+          {{ comment.user_created.first_name }}
+          {{ comment.user_created.last_name }}
+        </div>
         <div class="d-block">{{ comment.comment }}</div>
       </v-col>
     </v-row>
@@ -18,39 +27,31 @@
 </template>
 
 <script>
+import { GetCommentsByEvent } from "../../events/shared/services/events";
 export default {
+  props: ["from"],
   data() {
     return {
-      comments: [
-        {
-          id: 1,
-          url: "https://avatars0.githubusercontent.com/u/90640?v=4&s=460",
-          author: "John Smit",
-          comment: "Nice post",
-        },
-        {
-          id: 2,
-          url: "https://avatars0.githubusercontent.com/u/90840?v=4&s=460",
-          author: "chetan pUnani",
-          comment: "Nice post",
-        },
-        {
-          id: 3,
-          url: "https://avatars0.githubusercontent.com/u/90140?v=4&s=460",
-          author: "Rutvik Patel",
-          comment: "Nice post",
-        },
-        {
-          id: 4,
-          url: "https://avatars0.githubusercontent.com/u/90540?v=4&s=460",
-          author: "Sudarshan Dey",
-          comment: "Nice post",
-        },
-      ],
+      CommentArr: [],
     };
+  },
+  methods: {
+    CheckFrom() {
+      if (this.from === "event") {
+        GetCommentsByEvent(this.$route.params.id).then((res) => {
+          this.CommentArr = res.data;
+        });
+      } else if (this.from === "post") {
+        console.log('for post')
+      } else {
+        console.log('nothing')
+      }
+    },
+  },
+  created() {
+    this.CheckFrom();
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
