@@ -101,18 +101,20 @@ export default {
     };
   },
   methods: {
-    async validate() {
+    validate() {
       this.$refs.form.validate();
       if(this.valid){
-          await this.login();
-        }
+          this.login();
+          }
     },
     async login(){
       let res = await login(this.email,this.password);
         console.log(res); 
         appCookieStorage.set('access_token',res.data.access_token);
         this.$router.push('/');
- 
+        await this.$store.dispatch('alert',{
+            type:'success',message:'User logged in successful.'
+          });
     },
   }
 };

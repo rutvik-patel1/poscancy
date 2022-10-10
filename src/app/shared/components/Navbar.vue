@@ -144,6 +144,9 @@ export default {
       await logout(appCookieStorage.get('refresh_token'));
       appCookieStorage.remove('refresh_token');
       this.$router.push('/login');
+      this.$store.dispatch('alert',{
+        type:'success',message:'User logged out successful. '
+      })
     }
   },
 };

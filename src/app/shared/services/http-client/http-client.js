@@ -2,8 +2,11 @@ import axios from 'axios';
 
 import { apiBaseUrl } from '@/environment/environment';
 
+// import Cookies from 'js-cookie';
+// const token = Cookies.get('refresh_token');
 const config = {
-  baseURL: apiBaseUrl
+  baseURL: apiBaseUrl,
+ // headers:{ Authorization: token?`Bearer ${token}`:''}
 };
 
 const httpClient = axios.create(config);
