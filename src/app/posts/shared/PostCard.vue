@@ -1,11 +1,13 @@
 <template>
-  <v-card
+ <div>
+ <v-card
     :loading="loading"
     class="pa-4 pb-0"
     :class="{
       'mx-1 my-6': $vuetify.breakpoint.smAndDown,
       'mx-4 my-4': $vuetify.breakpoint.mdAndUp,
     }"
+    v-for="post in posts" :key="post.id"
   >
     <v-row class="mb-1">
       <v-col cols="2" lg="2">
@@ -15,7 +17,7 @@
       </v-col>
       <v-col cols="4" lg="6" class="pl-4">
         <div class="d-block font-weight-bold">{{ author }}</div>
-        <div class="d-block text-caption">{{ time }}</div>
+        <div class="d-block text-caption">{{ new Date(post.date_created).toUTCString() }}</div>
       </v-col>
       <v-col cols="4" lg="3">
         <v-btn depressed>
@@ -63,12 +65,12 @@
         </v-menu>
       </v-col>
     </v-row>
-
-    <v-img height="250" class="rounded-lg" :src="media"></v-img>
+        {{ typeof post.media }}
+    <v-img height="250" class="rounded-lg" :src="`https://a1drqkgw.directus.app/assets/` + post.media"></v-img>
 
     <v-card-text class="px-1">
       <div class="text--primary text-justify">
-        {{ caption }}
+        {{ post.description }}
       </div>
     </v-card-text>
     <v-divider class="mb-2"></v-divider>
@@ -103,19 +105,22 @@
       prepend-inner-icon="mdi-emoticon-happy-outline"
     ></v-text-field>
   </v-card>
+ </div>
+
 </template>
 
 <script>
+import { getAllPosts } from '..';
 export default {
   data() {
-    return {
+   return {
+      posts:{},
       avatar: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460",
       author: "John Smit",
-      time: "John Smit",
+      time: '',
       showMenu:false,
-      media: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
-      caption:
-        "relating to or dependent on charity charitable an eleemosynary educational institution relating to or dependent on charity charitable an eleemosynary educational institution. relating to or \n dependent on charity charitable an eleemosynary educational \n institution relating to or dependent on charity charitable an eleemosynary educational institution relating to or dependent on \n charity charitable",
+      media: '',
+      caption:'',  
       items: [
         {
           icon: "delete",
@@ -131,6 +136,17 @@ export default {
       ],
     };
   },
+  methods:{
+     getPosts(){
+      getAllPosts().then((res) => {
+      console.log(res.data);
+      this.posts = res.data;
+      }) 
+    },
+  },
+  mounted(){
+    this.getPosts();
+  }
 };
 </script>
 

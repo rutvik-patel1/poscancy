@@ -25,6 +25,6 @@ export default {
     NewsVue,
   },
   data: () => ({}),
-};
+ };
 </script>
   
