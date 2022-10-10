@@ -1,5 +1,5 @@
 <template>
-  <v-conainer key="a">
+  <v-container key="a">
     <v-card class="mx-2 my-2 pa-1 pb-1 pb-15">
       <v-card-title>Create Event</v-card-title>
       <v-divider></v-divider>
@@ -132,12 +132,13 @@
         </v-col>
       </v-row>
     </v-card>
-  </v-conainer>
+  </v-container>
 </template>
 
 <script>
 import DyamicForm from "./DyamicForm.vue";
 export default {
+  name: "CreateEvent",
   components: {
     DyamicForm,
   },

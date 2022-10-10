@@ -31,7 +31,7 @@
         clearable
         deletable-chips
         solo
-        :flat="$vuetify.breakpoint.smAndDown"
+        :text="$vuetify.breakpoint.smAndDown"
         class="my-auto"
         :class="{
           'ma-0': $vuetify.breakpoint.smAndDown,
@@ -55,7 +55,7 @@
               src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
             />
           </v-avatar>
-          <v-btn class="hidden-sm-and-down" flat text v-bind="attrs" v-on="on">
+          <v-btn class="hidden-sm-and-down" text v-bind="attrs" v-on="on">
             Robert john
           </v-btn>
         </template>

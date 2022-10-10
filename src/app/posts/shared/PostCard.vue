@@ -1,6 +1,5 @@
 <template>
   <v-card
-    :loading="loading"
     class="pa-4 pb-0"
     :class="{
       'mx-1 my-6': $vuetify.breakpoint.smAndDown,
@@ -9,7 +8,7 @@
   >
     <v-row class="mb-1">
       <v-col cols="2" lg="2">
-        <v-avatar size="45px" v-bind="attrs" v-on="on">
+        <v-avatar size="45px">
           <img alt="Avatar" :src="avatar" />
         </v-avatar>
       </v-col>
@@ -25,8 +24,8 @@
       </v-col>
       <v-col cols="2" lg="1">
         <v-menu v-model="showMenu" absolute offset-y style="max-width: 600px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn depressed icon v-bind="attrs" v-on="on">
+          <template >
+            <v-btn depressed icon >
               <v-icon>more_vert</v-icon>
             </v-btn>
           </template>

@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="channels"
     sort-by="calories"
     class="elevation-1"
   >
@@ -26,7 +26,7 @@
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.channel"
+                      v-model="editedItem.name"
                       label="Channel Name"
                     ></v-text-field>
                   </v-col>
@@ -61,16 +61,25 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-      <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+      <v-icon small class="mr-2" @click="editItem(item, item.id)">
+        mdi-pencil
+      </v-icon>
+      <v-icon small @click="deleteItem(item, item.id)"> mdi-delete </v-icon>
     </template>
     <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize"> Reset </v-btn>
+      <v-btn color="primary" @click="getChannels"> Reset </v-btn>
     </template>
   </v-data-table>
 </template>
 
 <script>
+import {
+  getAllChannels,
+  postChannel,
+  editChannel,
+  deleteChannel,
+} from "../services/channel";
+
 export default {
   data: () => ({
     dialog: false,
@@ -82,18 +91,18 @@ export default {
         sortable: false,
         value: "id",
       },
-      { text: "Channel", value: "channel" },
+      { text: "Channel", value: "name" },
       { text: "Actions", value: "actions", sortable: false },
     ],
-    desserts: [],
+    channels: [],
     editedIndex: -1,
+    editId: 0,
+    deleteId: 0,
     editedItem: {
-      id: 0,
-      channel: "",
+      name: "",
     },
     defaultItem: {
-      id: 0,
-      channel: "",
+      name: "",
     },
   }),
 
@@ -112,77 +121,84 @@ export default {
     },
   },
 
-  created() {
-    this.initialize();
-  },
-
   methods: {
-    initialize() {
-      this.desserts = [
-        {
-          id: 1,
-          channel: "#finance",
-        },
-        {
-            id: 2,
-          channel: "#books",
-        },
-        {
-            id: 3,
-          channel: "#travel",
-        },
-        {
-            id: 4,
-          channel: "#goatrip",
-        },
-        {
-            id: 5,
-          channel: "#movies",
-        },
-      ];
-    },
-
-    editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+    editItem(item, id) {
+      this.editId = id;
+      this.editedIndex = this.channels.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
-    deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+    deleteItem(item, id) {
+      this.deleteId = id;
+      console.log(this.deleteId);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
-      this.closeDelete();
+      deleteChannel(this.deleteId)
+        .then(() => {
+          this.getChannels();
+        })
+        .catch(async () => {
+          await this.$store.dispatch("alert", {
+            type: "error",
+            message: "Loaded channels failed !!!",
+          });
+        });
+      this.dialogDelete = false;
     },
 
     close() {
       this.dialog = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
     },
 
     closeDelete() {
       this.dialogDelete = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
     },
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        editChannel(this.editId, this.editedItem)
+          .then(() => {
+            this.getChannels();
+          })
+          .catch(async () => {
+            await this.$store.dispatch("alert", {
+              type: "error",
+              message: "Loaded channels failed !!!",
+            });
+          });
       } else {
-        this.desserts.push(this.editedItem);
+        postChannel(this.editedItem)
+          .then(() => {
+            this.getChannels();
+          })
+          .catch(async () => {
+            await this.$store.dispatch("alert", {
+              type: "error",
+              message: "Loaded channels failed !!!",
+            });
+          });
       }
       this.close();
     },
+
+    getChannels() {
+      getAllChannels()
+        .then((res) => {
+          this.channels = res.data;
+        })
+        .catch(async () => {
+          await this.$store.dispatch("alert", {
+            type: "error",
+            message: "Loaded all events failed !!!",
+          });
+        });
+    },
+  },
+  created() {
+    this.getChannels();
   },
 };
 </script>
