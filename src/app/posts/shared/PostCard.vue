@@ -1,11 +1,6 @@
 <template>
-<<<<<<< HEAD
-  <v-card
-=======
  <div>
  <v-card
-    :loading="loading"
->>>>>>> api/posts
     class="pa-4 pb-0"
     :class="{
       'mx-1 my-6': $vuetify.breakpoint.smAndDown,
