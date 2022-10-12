@@ -74,8 +74,9 @@
   </v-container>
 </template>
 <script>
+import { mapActions } from 'vuex';
 import { appCookieStorage } from '../shared/services';
-import { login } from './shared/services/auth';
+import { login,loggedInUser } from './shared/services/auth';
 export default {
   data() {
     return {
@@ -101,20 +102,24 @@ export default {
     };
   },
   methods: {
+    ...mapActions('authState',['setUserId']),
     validate() {
       this.$refs.form.validate();
       if(this.valid){
           this.login();
-          }
-    },
+        }
+      },
     async login(){
       let res = await login(this.email,this.password);
-        console.log(res); 
-        appCookieStorage.set('access_token',res.data.access_token);
-        this.$router.push('/');
-        await this.$store.dispatch('alert',{
-            type:'success',message:'User logged in successful.'
-          });
+      appCookieStorage.set('access_token',res.data.access_token);
+      let user = await loggedInUser(res.data.access_token);
+      console.log(user);
+      this.$store.dispatch('authState/setUserId',{userId:user.data.id});
+      this.$router.push('/');
+      
+      await this.$store.dispatch('alert',{
+        type:'success',message:'User logged in successful.'
+        });
     },
   }
 };
