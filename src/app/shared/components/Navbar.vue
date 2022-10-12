@@ -103,6 +103,7 @@
 </template>
 
 <script>
+import { mapGetters,mapActions } from 'vuex';
 import { logout } from '../../auth/shared/services/auth';
 import { appCookieStorage } from '../services';
 export default {
@@ -140,15 +141,24 @@ export default {
     click() {
       this.sidebar = !this.sidebar;
     },
+    ...mapActions('authState',['setUserId']),
    async logOut(){
-      await logout(appCookieStorage.get('refresh_token'));
-      appCookieStorage.remove('refresh_token');
+      await logout(appCookieStorage.get('access_token'));
+      appCookieStorage.remove('access_token');
+      this.$store.dispatch('authState/setUserId',{userId:''});
       this.$router.push('/login');
       this.$store.dispatch('alert',{
         type:'success',message:'User logged out successful. '
       })
     }
   },
+  computed:{
+    ...mapGetters(['authState/getUserId'])
+  },
+  mounted(){
+    let id = this.$store.getters['authState/getUserId'];
+    console.log(id);
+  }
 };
 </script>
 
