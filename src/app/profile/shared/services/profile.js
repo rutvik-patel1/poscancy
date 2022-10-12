@@ -11,4 +11,12 @@ const getPostCount = (id) => {
     return httpClient.get(url).then(res => res.data.meta.filter_count)
 }
 
-export { getUserDetails, getPostCount };
+const getProfile = (id)=>{
+    const url = apiBaseUrl + `/users/${id}`
+    return httpClient.get(url).then(res => res.data);
+};
+const updateProfile = (id,payload) => {
+    const url = apiBaseUrl + `/users/${id}`
+    httpClient.patch(url,payload).then(res => console.log(res));
+}
+export { getProfile, updateProfile, getUserDetails, getPostCount }
