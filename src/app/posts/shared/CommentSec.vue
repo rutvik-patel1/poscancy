@@ -2,7 +2,7 @@
   <div>
     <v-row v-for="comment in CommentArr" :key="comment.id">
       <v-col cols="2" lg="1">
-        <v-avatar size="45px" v-bind="attrs" v-on="on">
+        <v-avatar size="45px">
           <img
             alt="Avatar"
             :src="

@@ -7,7 +7,7 @@
       </div>
     </v-card>
     <v-card outlined class="ma-4 pa-1">
-      <v-card :loading="loading" class="mx-5 my-8 pa-4 pb-0" max-width="700">
+      <v-card class="mx-5 my-8 pa-4 pb-0" max-width="700">
         <v-row>
           <v-col cols="12" lg="5">
             <v-img
