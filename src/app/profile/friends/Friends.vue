@@ -25,6 +25,7 @@
         <v-tab> All </v-tab>
         <v-tab> Request </v-tab>
         <v-tab> Following </v-tab>
+        <v-tab> Add Friends</v-tab>
 
         <v-tab-item>
           <AllVue></AllVue>
@@ -35,6 +36,9 @@
         <v-tab-item>
           <FollowingVue></FollowingVue>
         </v-tab-item>
+        <v-tab-item>
+          <AddFriends></AddFriends>
+        </v-tab-item>
       </v-tabs>
     </div>
   </div>
@@ -44,11 +48,13 @@
 import AllVue from "./shared/component/All.vue";
 import RequestVue from "./shared/component/Request.vue";
 import FollowingVue from "./shared/component/Following.vue";
+import AddFriends from "./shared/component/AddFriends.vue";
 export default {
   components: {
     AllVue,
     RequestVue,
     FollowingVue,
+    AddFriends
   },
 };
 </script>

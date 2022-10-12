@@ -52,15 +52,15 @@
           <v-avatar size="36px" v-bind="attrs" v-on="on">
             <img
               alt="Avatar"
-              src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+              :src="`https://a1drqkgw.directus.app/assets/` +  userDetails.avatar"
             />
           </v-avatar>
           <v-btn class="hidden-sm-and-down" text v-bind="attrs" v-on="on">
-            Robert john
+            {{ userDetails.first_name }}  {{ userDetails.last_name }}
           </v-btn>
         </template>
         <v-list>
-          <v-list-item> Profile </v-list-item>
+          <v-list-item v-on:click="profilePage"> Profile </v-list-item>
           <v-list-item v-on:click="logOut"> Logout </v-list-item>
         </v-list>
       </v-menu>
@@ -103,12 +103,15 @@
 </template>
 
 <script>
+import { getUserDetails } from '../../profile/shared/services/profile'
 import { mapGetters,mapActions } from 'vuex';
 import { logout } from '../../auth/shared/services/auth';
 import { appCookieStorage } from '../services';
 export default {
   data() {
     return {
+      uid: null,
+      userDetails: [],
       sidebar: this.$vuetify.breakpoint.smAndDown ? false : true,
       admins: [
         ["Management", "mdi-account-multiple-outline"],
@@ -150,14 +153,21 @@ export default {
       this.$store.dispatch('alert',{
         type:'success',message:'User logged out successful. '
       })
+    },
+    getuserDetails() {
+      getUserDetails(this.uid).then(res => this.userDetails = res.data)
+    },
+    profilePage() {
+      this.$router.push('/profile');
     }
   },
   computed:{
     ...mapGetters(['authState/getUserId'])
   },
   mounted(){
-    let id = this.$store.getters['authState/getUserId'];
-    console.log(id);
+    this.uid = this.$store.getters['authState/getUserId'];
+    console.log(this.uid);
+    this.getuserDetails();
   }
 };
 </script>
