@@ -3,7 +3,7 @@ import axios from 'axios';
 import { apiBaseUrl } from '@/environment/environment';
 
 // import Cookies from 'js-cookie';
-// const token = Cookies.get('refresh_token');
+// const token = Cookies.get('access_token');
 const config = {
   baseURL: apiBaseUrl,
  // headers:{ Authorization: token?`Bearer ${token}`:''}

@@ -164,7 +164,7 @@ html {
 
 
 <script>
-import CommentSection from "../posts/shared/CommentSec.vue";
+import CommentSection from "../posts/shared/components/CommentSec.vue";
 export default {
   components: {
     CommentSection,
