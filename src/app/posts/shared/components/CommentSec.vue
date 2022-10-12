@@ -20,14 +20,14 @@
         <div class="d-block">{{ comment.comment }}</div>
       </v-col>
     </v-row>
-    <v-row class="mb-2" justify="center"
+    <v-row class="2" justify="center"
       ><v-btn depressed>See More Comments</v-btn></v-row
     >
   </div>
 </template>
 
 <script>
-import { GetCommentsByEvent } from "../../events/shared/services/events";
+import { GetCommentsByEvent } from "../../../events/shared/services/events";
 export default {
   props: ["from"],
   data() {

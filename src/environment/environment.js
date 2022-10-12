@@ -1,5 +1,4 @@
-const { VUE_APP_URL} = process.env;
-
-const apiBaseUrl = VUE_APP_URL;
+//const { VUE_APP_URL} = process.env;
+const apiBaseUrl = 'https://a1drqkgw.directus.app'
 
 export { apiBaseUrl };

@@ -182,7 +182,7 @@ html {
 
 <script>
 import { GetEventById } from "../services/events";
-import CommentSection from "../../../posts/shared/CommentSec.vue";
+import CommentSection from "../../../posts/shared/components/CommentSec.vue";
 export default {
   components: {
     CommentSection,
