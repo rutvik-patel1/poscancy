@@ -8,6 +8,7 @@
       }"
       v-for="post in posts"
       :key="post.id"
+      @click="postMore(post.id)"
     >
       <v-row class="mb-1">
         <v-col cols="2" lg="2">
@@ -67,12 +68,12 @@
           </v-menu>
         </v-col>
       </v-row>
-      {{ typeof post.media }}
+
       <v-img
         height="250"
         class="rounded-lg"
         :src="`https://a1drqkgw.directus.app/assets/` + post.media"
-      ></v-img>
+      > </v-img>
 
       <v-card-text class="px-1">
         <div class="text--primary text-justify">
@@ -159,6 +160,9 @@ export default {
     };
   },
   methods: {
+    postMore(id){
+      this.$router.push(`/post/${id}`)
+    },
     getPosts() {
       getAllPosts().then((res) => {
         this.posts = res.data;

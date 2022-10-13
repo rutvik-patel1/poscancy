@@ -5,7 +5,10 @@ const getAllPosts = () => {
     const url = apiBaseUrl + '/items/user_post'
     return httpClient.get(url).then( res => res.data )
 }
-
+const getPost = (id) => {
+    const url = apiBaseUrl + '/items/user_post/' + id
+    return httpClient.get(url).then(res => res.data);
+} 
 const CreatePost =  async (data) => {
     const url = apiBaseUrl + '/items/user_post'
          console.log(data)
@@ -27,4 +30,4 @@ const countComment = (id) => {
 }
 
 
-export { getAllPosts, CreatePost, countLike, countComment }
+export { getAllPosts, CreatePost, countLike, countComment,getPost }
