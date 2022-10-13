@@ -19,4 +19,9 @@ const updateProfile = (id,payload) => {
     const url = apiBaseUrl + `/users/${id}`
     httpClient.patch(url,payload).then(res => console.log(res));
 }
-export { getProfile, updateProfile, getUserDetails, getPostCount }
+
+const getAllUsers = () => {
+    const url = apiBaseUrl + '/users?&filter[role][_eq]=e5b07e75-ac1a-4cd3-8506-18a3e6cd55fa'
+    return httpClient.get(url).then(res => res.data)
+}
+export { getProfile, updateProfile, getUserDetails, getPostCount, getAllUsers }
