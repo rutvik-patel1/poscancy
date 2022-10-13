@@ -116,12 +116,23 @@ export default {
       console.log(user);
       this.$store.dispatch('authState/setUserId',{userId:user.data.id});
       this.$router.push('/');
-      
       await this.$store.dispatch('alert',{
         type:'success',message:'User logged in successful.'
         });
     },
+    async autoLogin(){
+    let token = appCookieStorage.get('access_token');
+    if(token){
+      this.$router.push('/');
+      await this.$store.dispatch('alert',{
+        type:'info',message:'Already logged in.'
+        });
+    }
   }
+ },
+ mounted(){
+this.autoLogin();  
+}
 };
 </script>
 <style css scoped>
