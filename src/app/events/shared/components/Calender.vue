@@ -46,12 +46,7 @@
           v-model="focus"
           color="primary"
           :events="events"
-          :event-color="getEventColor"
-          :type="type"
           @click:event="showEvent"
-          @click:more="viewDay"
-          @click:date="viewDay"
-          @change="updateRange"
         ></v-calendar>
         <v-menu
           v-model="selectedOpen"
@@ -89,6 +84,8 @@
 </template>
 
 <script>
+import { getCalanderEvents } from '../services/events'
+
 export default {
   data: () => ({
     focus: "",
@@ -107,26 +104,33 @@ export default {
       "blue",
       "indigo",
       "deep-purple",
-      "cyan",
       "green",
       "orange",
-      "grey darken-1",
+      "red",
     ],
-    names: [
-      "Meeting",
-      "Holiday",
-      "PTO",
-      "Travel",
-      "Event",
-      "Birthday",
-      "Conference",
-      "Party",
-    ],
+    
   }),
   mounted() {
-    this.$refs.calendar.checkChange();
+    getCalanderEvents().then((res)=>{
+      console.log(res)
+      const calData = res.map((each)=>{
+        return {
+          'id':each.id,
+          'name': each.event_name,
+          'start':each.start_date,
+          'color': this.colors[this.rnd(0, this.colors.length - 1)],
+          'end':each.end_date
+        }
+      })
+      console.log(calData)
+      this.events = calData
+    })
   },
   methods: {
+    showEvent(e){
+      console.log(e.event.id)
+      this.$router.push({ name:'EventPage' , params: { id: e.event.id  } })
+    },
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
@@ -142,50 +146,6 @@ export default {
     },
     next() {
       this.$refs.calendar.next();
-    },
-    showEvent({ nativeEvent, event }) {
-      const open = () => {
-        this.selectedEvent = event;
-        this.selectedElement = nativeEvent.target;
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => (this.selectedOpen = true))
-        );
-      };
-
-      if (this.selectedOpen) {
-        this.selectedOpen = false;
-        requestAnimationFrame(() => requestAnimationFrame(() => open()));
-      } else {
-        open();
-      }
-
-      nativeEvent.stopPropagation();
-    },
-    updateRange({ start, end }) {
-      const events = [];
-
-      const min = new Date(`${start.date}T00:00:00`);
-      const max = new Date(`${end.date}T23:59:59`);
-      const days = (max.getTime() - min.getTime()) / 86400000;
-      const eventCount = this.rnd(days, days + 1);
-
-      for (let i = 0; i < eventCount; i++) {
-        const allDay = this.rnd(0, 3) === 0;
-        const firstTimestamp = this.rnd(min.getTime(), max.getTime());
-        const first = new Date(firstTimestamp - (firstTimestamp % 900000));
-        const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
-        const second = new Date(first.getTime() + secondTimestamp);
-
-        events.push({
-          name: this.names[this.rnd(0, 3)],
-          start: first,
-          end: second,
-          color: this.colors[this.rnd(0, this.colors.length - 1)],
-          timed: !allDay,
-        });
-      }
-
-      this.events = events;
     },
     rnd(a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a;
