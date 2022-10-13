@@ -17,4 +17,9 @@ const GetCommentsByEvent = (id) => {
   return httpClient.get(url).then(res => res.data);
 };
 
-export { events, GetEventById, GetCommentsByEvent};
+const getCalanderEvents = () => {
+  const url = apiBaseUrl + '/items/event?fields=id,start_date,end_date,event_name'
+  return httpClient.get(url).then(res => res.data.data);
+}
+
+export { events, GetEventById, GetCommentsByEvent, getCalanderEvents};

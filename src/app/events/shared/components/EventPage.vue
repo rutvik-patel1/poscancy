@@ -96,7 +96,7 @@
                   ></v-file-input>
 
                   <v-radio-group
-                    v-model="row"
+              
                     label="Select mode of transportation:"
                   >
                     <v-radio label="Option 1" value="radio-1"></v-radio>
