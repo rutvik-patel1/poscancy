@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { CreatePost } from '../../posts';
+import { CreatePost } from '../../posts/shared/services/posts'
 export default {
   name: "Article",
   data: () => ({

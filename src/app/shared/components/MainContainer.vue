@@ -14,7 +14,7 @@
   <script>
 import ArticleVue from "./Article.vue";
 import NewsVue from "./News.vue";
-import PostCard from "../../posts/shared/PostCard.vue";
+import PostCard from "../../posts/shared/components/PostCard.vue";
 import EventCard from "../../events/shared/components/EventCard.vue";
 export default {
   name: "HelloWorld",
