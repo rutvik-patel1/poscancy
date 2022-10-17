@@ -147,7 +147,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import { getProfile,updateProfile } from '../services/profile'
 export default {
   components: {},
@@ -200,7 +199,7 @@ export default {
           this.$store.dispatch('alert',{
             type:'success',message:'Profile update successful.'
          });
-         this.clear();
+         this.$router.go();
       });
         }
        this.clear();
@@ -217,7 +216,7 @@ export default {
       this.$refs.observer.reset();
     },
    async getUserProfile(){
-      this.userId = this.$store.getters['authState/getUserId'];
+      this.userId = localStorage.getItem('Id');
       console.log(this.userId);
       let { data } = await getProfile(this.userId);
       this.email=data.email;
@@ -229,9 +228,6 @@ export default {
       this.about = data.description;
       this.gender = data.gender;
       },
-  },
-  computed:{
-    ...mapGetters(['authState/getUserId'])
   },
   mounted(){
     this.getUserProfile();  

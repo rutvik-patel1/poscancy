@@ -17,7 +17,7 @@ const getProfile = (id)=>{
 };
 const updateProfile = (id,payload) => {
     const url = apiBaseUrl + `/users/${id}`
-    httpClient.patch(url,payload).then(res => console.log(res));
+    return httpClient.patch(url,payload).then(res => console.log(res));
 }
 
 const getAllUsers = () => {
