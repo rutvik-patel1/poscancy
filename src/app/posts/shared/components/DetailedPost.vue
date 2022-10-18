@@ -43,14 +43,14 @@
         <v-col align="center">
           <v-btn icon color="primary" tile>
             <v-icon>mdi-thumb-up-outline</v-icon>
-            <div style="color: #777d74">Likes</div>
+            <div style="color: #777d74"> {{ likes}} Likes</div>
           </v-btn>
         </v-col>
 
         <v-col align="center">
           <v-btn icon color="primary">
             <v-icon>mdi-comment</v-icon>
-            <div style="color: #777d74">Comments</div>
+            <div style="color: #777d74">{{comment_count}} Comments</div>
           </v-btn>
         </v-col>
 
@@ -62,20 +62,29 @@
         </v-col>
       </v-row>
       <!-- <v-divider class="mx-4"></v-divider> -->
-      <v-text-field
-        class="mt-2"
+      <v-row>
+        <v-text-field
+        class="mt-2 mx-1"
         outlined
         dense
         label="Add comment"
+        v-model="comment"
         prepend-inner-icon="mdi-emoticon-happy-outline"
       ></v-text-field>
-      <comment-section></comment-section>
+      <v-btn class="d-block align-center" 
+        style="position: relative; bottom:-0.5em;" 
+        @click="commentPost(post.id)">
+            <v-icon>mdi-send</v-icon>
+      </v-btn>
+ 
+      </v-row>
+           <comment-section from="post"></comment-section>
     </v-card>
   </v-container>
 </template>
   
 <script>
-import { getPost } from "../services/posts";
+import { getPost,countComment,countLike,commentOnPost } from "../services/posts";
 import CommentSection from "./CommentSec.vue";
 
 export default {
@@ -86,7 +95,8 @@ export default {
     return {
       avatar: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460",
       author:'John Smith',
-      post:[], 
+      post:[],comment:'',
+      comment_count:0,likes:0,
     };
   },
   methods:{
@@ -96,10 +106,24 @@ export default {
        let res = await getPost(id);
        this.post = res.data;
        console.log(this.post);
+    },
+    async getCommentAndLikes(){
+      let id = this.$route.params.id;
+      this.comment_count = await countComment(id);
+      this.likes = await countLike(id);
+    },
+    async commentPost(id){
+       
+      await commentOnPost({ post_id:id ,comment: this.comment}).then(res => {
+        console.log(res.data);
+        this.$store.dispatch('alert',{ type:'success',message:'Comment Added successfully'})
+      })
+      this.$router.go();
     }
   },
   mounted(){
     this.getPostById();
+    this.getCommentAndLikes();
   }
 };
 </script>

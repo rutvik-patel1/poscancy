@@ -1,6 +1,7 @@
 import { httpClient } from '../../../shared/services/';
 import { apiBaseUrl } from '@/environment/environment';
-
+import Cookies from 'js-cookie';
+const token = Cookies.get('access_token');
 const getAllPosts = () => {
     const url = apiBaseUrl + '/items/user_post'
     return httpClient.get(url).then( res => res.data )
@@ -28,6 +29,12 @@ const countComment = (id) => {
     const url = apiBaseUrl + '/items/user_post_comment?filter[post_id][_eq]=' + id + '&meta=filter_count'
     return httpClient.get(url).then( res => res.data.meta.filter_count )
 }
-
-
-export { getAllPosts, CreatePost, countLike, countComment,getPost }
+const getCommentsByPost = (id) => {
+    const url = apiBaseUrl + '/items/user_post_comment?filter[post_id][_eq]=' + id + '&fields=*.*.*'
+    return httpClient.get(url).then( res => res.data )
+}
+const commentOnPost = (data) => {
+    const url = apiBaseUrl + '/items/user_post_comment'
+     return httpClient.post(url,data,{ headers: { Authorization: `Bearer ${token}` }}).then(res => res.data);
+} 
+export { getAllPosts, CreatePost, countLike, countComment,getPost,getCommentsByPost,commentOnPost }
