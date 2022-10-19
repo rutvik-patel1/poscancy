@@ -14,7 +14,8 @@
 </template>
 
 <script>
-//test commit
+import { appCookieStorage } from './shared/services';
+
 export default {
   name: "App",
   data() {
@@ -31,6 +32,12 @@ export default {
       return this.$store.state.alertMsg;
     },
   },
+  mounted(){
+    let token = appCookieStorage.get('access_token');
+    if(!token){
+        this.$router.push('/login');
+    }
+  }
 };
 </script>
 
