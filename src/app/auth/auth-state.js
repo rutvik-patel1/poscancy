@@ -1,5 +1,9 @@
+import { appCookieStorage } from '../shared/services/app-storage/app-storage';
+const token =  appCookieStorage.get('access_token')
+
 const state = {
-    userId: ''
+    userId: '',
+    token: token || ''
 };
 const mutations = {
     setUserId(state, id) {
