@@ -148,6 +148,7 @@ export default {
    async logOut(){
       await logout(appCookieStorage.get('access_token'));
       appCookieStorage.remove('access_token');
+      localStorage.removeItem('Id');
       this.$store.dispatch('authState/setUserId',{userId:''});
       this.$router.push('/login');
       this.$store.dispatch('alert',{

@@ -9,12 +9,14 @@
       <v-row class="mb-1">
         <v-col cols="2" lg="1" sm="1">
           <v-avatar size="45px">
-            <img alt="Avatar" :src="post.avatar" />
+            <img alt="Avatar" :src="avatar" />
           </v-avatar>
         </v-col>
         <v-col cols="5" lg="7" sm="8" class="pl-4">
-          <div class="d-block font-weight-bold">{{ post.author }}</div>
-          <div class="d-block text-caption">{{ post.timeStamp }}</div>
+          <div class="d-block font-weight-bold">{{ author }}</div>
+          <div class="d-block text-caption">
+            {{ new Date(post.date_created).toUTCString() }}
+          </div>
         </v-col>
         <v-col cols="5" lg="4" sm="1">
           <v-btn depressed>
@@ -28,12 +30,12 @@
         height="250"
         max-width="500"
         class="rounded-lg"
-        :src="post.media"
+        :src="`https://a1drqkgw.directus.app/assets/` + post.media"
       ></v-img>
 
       <v-card-text class="px-1">
         <div class="text--primary text-justify">
-          {{ post.caption }}
+          {{ post.description }}
         </div>
       </v-card-text>
       <v-divider class="mb-2"></v-divider>
@@ -41,14 +43,14 @@
         <v-col align="center">
           <v-btn icon color="primary" tile>
             <v-icon>mdi-thumb-up-outline</v-icon>
-            <div style="color: #777d74">Likes</div>
+            <div style="color: #777d74"> {{ likes}} Likes</div>
           </v-btn>
         </v-col>
 
         <v-col align="center">
           <v-btn icon color="primary">
             <v-icon>mdi-comment</v-icon>
-            <div style="color: #777d74">Comments</div>
+            <div style="color: #777d74">{{comment_count}} Comments</div>
           </v-btn>
         </v-col>
 
@@ -60,37 +62,69 @@
         </v-col>
       </v-row>
       <!-- <v-divider class="mx-4"></v-divider> -->
-      <v-text-field
-        class="mt-2"
+      <v-row>
+        <v-text-field
+        class="mt-2 mx-1"
         outlined
         dense
         label="Add comment"
+        v-model="comment"
         prepend-inner-icon="mdi-emoticon-happy-outline"
       ></v-text-field>
-      <comment-section></comment-section>
+      <v-btn class="d-block align-center" 
+        style="position: relative; bottom:-0.5em;" 
+        @click="commentPost(post.id)">
+            <v-icon>mdi-send</v-icon>
+      </v-btn>
+ 
+      </v-row>
+           <comment-section from="post"></comment-section>
     </v-card>
   </v-container>
 </template>
   
 <script>
+import { getPost,countComment,countLike,commentOnPost } from "../services/posts";
 import CommentSection from "./CommentSec.vue";
+
 export default {
   components: {
     CommentSection,
   },
   data() {
     return {
-      post: {
-        id: 1,
-        avatar: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460",
-        author: "John Smit",
-        timeStamp: "1 hr Ago",
-        media: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
-        caption:
-          "relating to or dependent on charity charitable an eleemosynary educational institution relating to or dependent on charity charitable an eleemosynary educational institution. relating to or \n dependent on charity charitable an eleemosynary educational \n institution relating to or dependent on charity charitable an eleemosynary educational institution relating to or dependent on \n charity charitable",
-      },
+      avatar: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460",
+      author:'John Smith',
+      post:[],comment:'',
+      comment_count:0,likes:0,
     };
   },
+  methods:{
+    async getPostById(){
+       let id = this.$route.params.id;
+       console.log(id);
+       let res = await getPost(id);
+       this.post = res.data;
+       console.log(this.post);
+    },
+    async getCommentAndLikes(){
+      let id = this.$route.params.id;
+      this.comment_count = await countComment(id);
+      this.likes = await countLike(id);
+    },
+    async commentPost(id){
+       
+      await commentOnPost({ post_id:id ,comment: this.comment}).then(res => {
+        console.log(res.data);
+        this.$store.dispatch('alert',{ type:'success',message:'Comment Added successfully'})
+      })
+      this.$router.go();
+    }
+  },
+  mounted(){
+    this.getPostById();
+    this.getCommentAndLikes();
+  }
 };
 </script>
   
