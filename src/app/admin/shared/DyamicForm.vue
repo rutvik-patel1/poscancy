@@ -125,10 +125,6 @@
                       v-model="model"
                       outlined
                       :schema="uchema"
-                      @input="logEvent('input', $event)"
-                      @change="logEvent('change', $event)"
-                      @input-child="logEvent('input-child', $event)"
-                      @change-child="logEvent('change-child', $event)"
                     />
                     <v-btn color="primary">Submit</v-btn>
                   </v-form>
