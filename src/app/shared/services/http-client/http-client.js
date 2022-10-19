@@ -1,12 +1,10 @@
 import axios from 'axios';
 
 import { apiBaseUrl } from '@/environment/environment';
+import Cookies from 'js-cookie';
 
-// import Cookies from 'js-cookie';
-// const token = Cookies.get('access_token');
 const config = {
   baseURL: apiBaseUrl,
- // headers:{ Authorization: token?`Bearer ${token}`:''}
 };
 
 const httpClient = axios.create(config);
@@ -14,6 +12,15 @@ const httpClient = axios.create(config);
 
 const authInterceptor = config => {
   /** add auth token */
+  const token = Cookies.get('access_token')
+    if (token) {
+      if (token) {
+        config.headers["Authorization"] = "Bearer " + token;
+      }
+  
+    }
+    
+
   return config;
 };
 

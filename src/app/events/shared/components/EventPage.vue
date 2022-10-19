@@ -60,72 +60,16 @@
                 >Participation Form</v-expansion-panel-header
               >
               <v-expansion-panel-content>
-                <v-form ref="form" v-model="valid" lazy-validation>
-                  <v-text-field
-                    v-model="name"
-                    :rules="nameRules"
-                    label="Name"
-                    required
-                    outlined
-                    dense
-                  ></v-text-field>
-
-                  <v-text-field
-                    v-model="email"
-                    :rules="emailRules"
-                    label="E-mail"
-                    required
-                    outlined
-                    dense
-                  ></v-text-field>
-
-                  <v-select
-                    v-model="select"
-                    :items="items"
-                    :rules="[(v) => !!v || 'Item is required']"
-                    label="Item"
-                    required
-                    outlined
-                    dense
-                  ></v-select>
-
-                  <v-file-input
-                    label="File input"
-                    outlined
-                    dense
-                  ></v-file-input>
-
-                  <v-radio-group
-              
-                    label="Select mode of transportation:"
-                  >
-                    <v-radio label="Option 1" value="radio-1"></v-radio>
-                    <v-radio label="Option 2" value="radio-2"></v-radio>
-                  </v-radio-group>
-
-                  <v-textarea
-                    outlined
-                    name="textarea"
-                    label="Suggestions"
-                    value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-                  ></v-textarea>
-
-                  <v-checkbox
-                    v-model="checkbox"
-                    :rules="[(v) => !!v || 'You must agree to continue!']"
-                    label="Do you agree?"
-                    required
-                  ></v-checkbox>
-
-                  <v-btn
-                    :disabled="!valid"
-                    color="primary"
-                    class="mr-4"
-                    @click="validate"
-                  >
-                    Submit!
-                  </v-btn>
-                </v-form>
+                
+              <v-form
+                ref="form"
+                v-model="valid"
+                @submit.prevent="submit"
+                
+              >
+                <v-jsf v-model="model" outlined :schema="schema" />
+                <v-btn type="submit">Submit</v-btn>
+              </v-form>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -181,13 +125,41 @@ html {
 </style>
 
 <script>
-import { GetEventById } from "../services/events";
+// import CommentSection from "../../../posts/shared/CommentSec.vue";
+import VJsf from "@koumoul/vjsf/lib/VJsf.js";
+import "@koumoul/vjsf/lib/VJsf.css";
+import "@koumoul/vjsf/lib/deps/third-party.js";
+import { GetEventById, sendFormData } from "../services/events";
 import CommentSection from "../../../posts/shared/components/CommentSec.vue";
 export default {
+  async created() {
+    await fetch("https://poke-api-f63a6-default-rtdb.firebaseio.com/data.json")
+      .then((res) => res.json())
+      .then((res) => (this.schema = res));
+
+      GetEventById(this.$route.params.id).then((res) => {
+      this.EventArr = res.data;
+      this.schema = res.data.form_schema
+      console.log(this.schema)
+    });
+    
+  },
   components: {
     CommentSection,
+    VJsf,
   },
   data: () => ({
+    show: false,
+    model: null,
+    title: "Annual Goa Trip",
+    time: "15 Sep 2022 to 21 Sep 2022",
+    media: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
+    time1: "1 Sep 2022",
+    time2: "5 Sep 2022",
+    desc1:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt expedita eaque minima atque! Rerum delectus iusto repellat, quae a et quibusdam quod cum maiores odit laboriosam, quia vitae distinctio illum?",
+    desc2:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt expedita eaque minima atque! Rerum delectus iusto repellat, quae a et quibusdam quod cum maiores odit laboriosam, quia vitae distinctio illum?",
     EventArr: [],
     valid: true,
     name: "",
@@ -205,6 +177,16 @@ export default {
     checkbox: false,
   }),
   methods: {
+    submit() {
+      console.log("===>",this.model)
+      const payload = {
+        event_id: this.$route.params.id,
+        form_response: this.model
+      }
+      sendFormData(payload).then((res)=>{
+        console.log(res.data)
+      })
+    },
     validate() {
       this.$refs.form.validate();
     },
@@ -215,12 +197,6 @@ export default {
       this.$refs.form.resetValidation();
     },
     
-  },
-  created() {
-    GetEventById(this.$route.params.id).then((res) => {
-      this.EventArr = res.data;
-    });
-
   },
 };
 </script>

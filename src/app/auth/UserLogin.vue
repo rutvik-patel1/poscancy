@@ -114,6 +114,7 @@ export default {
       appCookieStorage.set('access_token',res.data.access_token);
       let user = await loggedInUser(res.data.access_token);
       console.log(user);
+      localStorage.setItem('Id',user.data.id);
       this.$store.dispatch('authState/setUserId',{userId:user.data.id});
       this.$router.push('/');
       await this.$store.dispatch('alert',{

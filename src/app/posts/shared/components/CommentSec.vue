@@ -28,6 +28,7 @@
 
 <script>
 import { GetCommentsByEvent } from "../../../events/shared/services/events";
+import { getCommentsByPost } from "../services/posts";
 export default {
   props: ["from"],
   data() {
@@ -42,7 +43,9 @@ export default {
           this.CommentArr = res.data;
         });
       } else if (this.from === "post") {
-        console.log('for post')
+        getCommentsByPost(this.$route.params.id).then((res)=>{
+          this.CommentArr = res.data;
+        })
       } else {
         console.log('nothing')
       }
