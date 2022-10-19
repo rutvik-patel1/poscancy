@@ -8,6 +8,7 @@
       }"
       v-for="item in allEventArr"
       :key="item.id"
+      @click="eventMore(item.id)"
     >
       <v-row>
         <v-col cols="12" lg="5">
@@ -23,10 +24,13 @@
           <div>{{ item.start_date }} - {{ item.end_date }}</div>
           <v-card-text class="px-1">
             <div class="text--primary text-justify mb-2">
-              {{ item.description }}
+              {{ item.description.slice(0, 250) }}
+              <span style="color: #0a66c2" @click="eventMore(item.id)"
+                >..read more</span
+              >
             </div>
             <p>
-              <v-btn depressed outlined color="primary" :to="`event/`+item.id"
+              <v-btn depressed outlined color="primary" :to="`event/` + item.id"
                 >See More
                 <v-icon color="primary">mdi-chevron-right</v-icon>
               </v-btn>
@@ -42,16 +46,68 @@
 import { events } from "../services/events";
 
 export default {
+  props: ["eventtype"],
   data() {
     return {
-      allEventArr: {},
+      allEventArr: [],
     };
   },
+  methods: {
+    eventMore(id) {
+      this.$router.push(`/event/${id}`);
+    },
+    CheckEventType() {
+      var date = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
+      const today = new Date(date);
+
+      if (this.eventtype === "ongoing") {
+        events()
+          .then((res) => {
+            this.allEventArr = res.data;
+
+            this.allEventArr = this.allEventArr.filter((item) => {
+              const itemDate = new Date(item.start_date);
+              return itemDate > today;
+            });
+          })
+          .catch(async () => {
+            await this.$store.dispatch("alert", {
+              type: "error",
+              message: "Loaded all events failed !!!",
+            });
+          });
+      } else if (this.eventtype === "past") {
+        events()
+          .then((res) => {
+            this.allEventArr = res.data;
+
+            this.allEventArr = this.allEventArr.filter((item) => {
+              const itemDate = new Date(item.start_date);
+              return itemDate < today;
+            });
+          })
+          .catch(async () => {
+            await this.$store.dispatch("alert", {
+              type: "error",
+              message: "Loaded all events failed !!!",
+            });
+          });
+      } else {
+        events()
+          .then((res) => {
+            this.allEventArr = res.data;
+          })
+          .catch(async () => {
+            await this.$store.dispatch("alert", {
+              type: "error",
+              message: "Loaded all events failed !!!",
+            });
+          });
+      }
+    },
+  },
   created() {
-    events().then((res) => {
-      console.log(res.data)
-      this.allEventArr = res.data;
-    });
+    this.CheckEventType();
   },
 };
 </script>

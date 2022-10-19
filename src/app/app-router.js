@@ -13,7 +13,13 @@ Vue.use(VueRouter)
 
 const appRoutes = [
   {
-    path: '/',
+    name: 'APPP',
+    path:'/',
+    redirect:{ name: 'newsfeed' }
+  },
+  {
+    path: '',
+    redirect:{ name:'newsfeed' },
     component: ()=> import('./shared/components/Home.vue'),
     children:[
       ...authRoutes,
@@ -39,7 +45,7 @@ const appRoutes = [
         component: () => import('./shared/components/HomeView.vue'),
         children:[
           {
-            path: '/newsfeed',
+            path: 'newsfeed',
             name: 'newsfeed',
             component: () => import('./shared/components/MainContainer.vue'),
           },
@@ -54,6 +60,8 @@ const appRoutes = [
           },
         ]
       },
+      
+      
     ]
   },
   

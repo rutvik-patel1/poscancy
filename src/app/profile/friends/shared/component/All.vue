@@ -8,7 +8,7 @@
     >
       <v-card
         v-for="item in items"
-        :key="item"
+        :key="item.id"
         class="pa-2 ma-4 rounded-xl"
         outlined
 
@@ -42,26 +42,32 @@ export default {
   data: () => ({
     items: [
       {
+        id: 1,
         avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
         title: "Brunch",
       },
       {
+        id: 2,
         avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
         title: "Brunch",
       },
       {
+        id: 3,
         avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
         title: "Brunch",
       },
       {
+        id: 4,
         avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
         title: "Brunch",
       },
       {
+        id: 5,
         avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
         title: "Brunch",
       },
       {
+        id: 6,
         avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
         title: "Brunch",
       },

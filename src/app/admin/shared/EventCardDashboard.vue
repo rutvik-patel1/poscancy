@@ -13,7 +13,7 @@
           '': $vuetify.breakpoint.smAndDown,
           'ma-4': $vuetify.breakpoint.mdAndUp,
         }" 
-        width="330" v-for="item in ongoing" :key="item">
+        width="330" v-for="item in ongoing" :key="item.name">
           <v-container>
             <v-row>
               <v-col
@@ -73,7 +73,7 @@
           '': $vuetify.breakpoint.smAndDown,
           'ma-4': $vuetify.breakpoint.mdAndUp,
         }" 
-        width="330" v-for="item in upcoming" :key="item">
+        width="330" v-for="item in upcoming" :key="item.name">
           <v-container>
             <v-row>
               <v-col
@@ -127,44 +127,44 @@ export default {
   data: () => ({
     ongoing: [
       {
-        name: "Annual Goa Trip",
+        name: "Annual Goa Trip1",
         date: "14 sept - 20 sep 2022",
         image: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
       },
       {
-        name: "Annual Goa Trip",
+        name: "Annual Goa Trip2",
         date: "15 sept - 21 sep 2022",
         image: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
       },
       {
-        name: "Annual Goa Trip",
+        name: "Annual Goa Trip3",
         date: "16 sept - 22 sep 2022",
         image: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
       },
       {
-        name: "Annual Goa Trip",
+        name: "Annual Goa Trip4",
         date: "17 sept - 23 sep 2022",
         image: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
       },
     ],
     upcoming: [
       {
-        name: "Annual Goa Trip",
+        name: "Annual Goa Trip5",
         date: "15 Feb - 21 Feb 2023",
         image: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
       },
       {
-        name: "Annual Goa Trip",
+        name: "Annual Goa Trip6",
         date: "16 Feb - 22 Feb 2023",
         image: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
       },
       {
-        name: "Annual Goa Trip",
+        name: "Annual Goa Trip7",
         date: "17 Feb - 23 Feb 2023",
         image: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
       },
       {
-        name: "Annual Goa Trip",
+        name: "Annual Goa Trip8",
         date: "18 Feb - 24 Feb 2023",
         image: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
       },

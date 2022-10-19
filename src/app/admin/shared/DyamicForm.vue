@@ -108,33 +108,37 @@
         </div>
         <!-- <v-btn color="primary" width="100%" @click="showPreview()">Preview Form</v-btn> -->
         <v-row justify="center">
-          <v-dialog v-model="dialog" max-width="600px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark width="100%" v-bind="attrs" v-on="on">
-                Preview Form
-              </v-btn>
-            </template>
-
-            <v-card class="pa-2">
-              <v-card-title>
-                <span class="text-h5">Preview Form</span>
-              </v-card-title>
-              <v-container>
-                <v-form ref="form" v-model="valid">
-                  <v-jsf
-                    v-model="model"
-                    outlined
-                    :schema="uchema"
-                    @input="logEvent('input', $event)"
-                    @change="logEvent('change', $event)"
-                    @input-child="logEvent('input-child', $event)"
-                    @change-child="logEvent('change-child', $event)"
-                  />
-                  <v-btn color="primary">Submit</v-btn>
-                </v-form>
-              </v-container>
-            </v-card>
-          </v-dialog>
+          <v-col>
+            <v-dialog v-model="dialog" max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn color="primary" dark width="100%" v-bind="attrs" v-on="on">
+                  Preview Form
+                </v-btn>
+              </template>
+              <v-card class="pa-2">
+                <v-card-title>
+                  <span class="text-h5">Preview Form</span>
+                </v-card-title>
+                <v-container>
+                  <v-form ref="form" v-model="valid">
+                    <v-jsf
+                      v-model="model"
+                      outlined
+                      :schema="uchema"
+                      @input="logEvent('input', $event)"
+                      @change="logEvent('change', $event)"
+                      @input-child="logEvent('input-child', $event)"
+                      @change-child="logEvent('change-child', $event)"
+                    />
+                    <v-btn color="primary">Submit</v-btn>
+                  </v-form>
+                </v-container>
+              </v-card>
+            </v-dialog>
+          </v-col>
+          <v-col>
+            <v-btn @click="getSchema" color="primary" width="100%">Create Form</v-btn>
+          </v-col>
         </v-row>
       </v-col>
     </v-row>
@@ -281,6 +285,9 @@ export default {
       this.selectList.push(this.selectOption);
       this.selectOption = "";
     },
+    getSchema(){
+      this.$emit('getSchema',this.uchema)
+    }
   },
 };
 </script>

@@ -9,7 +9,7 @@
 
 <script>
 import Article from "../../../shared/components/Article.vue";
-import PostCard from '../../../posts/shared/PostCard.vue'
+import PostCard from '../../../posts/shared/components/PostCard.vue'
 export default {
   name: "Photos",
   components: {

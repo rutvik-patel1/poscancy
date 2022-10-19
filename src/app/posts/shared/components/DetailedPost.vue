@@ -5,10 +5,10 @@
       'px-15': $vuetify.breakpoint.mdAndUp,
     }"
   >
-    <v-card :loading="loading" class="pa-4 pb-1 ma-auto" style="max-width:550px">
+    <v-card class="pa-4 pb-1 ma-auto" style="max-width:550px">
       <v-row class="mb-1">
         <v-col cols="2" lg="1" sm="1">
-          <v-avatar size="45px" v-bind="attrs" v-on="on">
+          <v-avatar size="45px">
             <img alt="Avatar" :src="post.avatar" />
           </v-avatar>
         </v-col>

@@ -12,14 +12,16 @@
     </div>
 
     <div class="ma-6">
-      <form @submit.prevent="submit">
+      <v-form ref="observer" 
+        v-model="valid" 
+        @submit.prevent="submit">
         <v-container>
           <v-row>
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-text-field
                 v-model="email"
-                :error-messages="errors"
                 label="Email"
+                :rules="emailRules"
                 required
                 outlined
               ></v-text-field>
@@ -27,11 +29,18 @@
           </v-row>
 
           <v-row>
-            <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
+            <v-col cols="6" xl="5" lg="5" md="5" sm="6" xs="6">
               <v-text-field
-                v-model="name"
-                :error-messages="errors"
-                label="Name"
+                v-model="firstName"
+                label="First Name"
+                required
+                outlined
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6" xl="5" lg="5" md="5" sm="6" xs="6">
+              <v-text-field
+                v-model="lastName"
+                label="Last Name"
                 required
                 outlined
               ></v-text-field>
@@ -42,8 +51,8 @@
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-text-field
                 v-model="phoneNumber"
-                :error-messages="errors"
                 label="Phone Number"
+                :rules="phoneRules"
                 required
                 outlined
               ></v-text-field>
@@ -54,7 +63,6 @@
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-textarea
                 v-model="address"
-                :error-messages="errors"
                 outlined
                 label="Address"
                 required
@@ -87,7 +95,7 @@
                   :active-picker.sync="activePicker"
                   :max="
                     new Date(
-                      Date.now() - new Date().getTimezoneOffset() * 60000
+                      Date.now() - new Date().getTimezoneOffset() * 6000
                     )
                       .toISOString()
                       .substr(0, 10)
@@ -101,7 +109,6 @@
               <v-select
                 v-model="gender"
                 :items="items"
-                :error-messages="errors"
                 label="Gender"
                 data-vv-name="Gender"
                 required
@@ -114,7 +121,6 @@
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-textarea
                 v-model="about"
-                :error-messages="errors"
                 outlined
                 label="About"
                 required
@@ -125,33 +131,42 @@
           <v-row>
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-row justify="space-between">
-                <v-btn @click="edit" outlined color="#0A66C2"
+                <v-btn outlined color="#0A66C2"
                   ><v-icon>mdi-pencil-outline</v-icon> edit
                 </v-btn>
-                <v-btn
-                  class="mr-4 btn-color"
-                  type="submit"
-                  :disabled="invalid"
-                  color="#0A66C2"
-                >
+                <v-btn class="mr-4 btn-color" type="submit" color="#0A66C2">
                   submit
                 </v-btn>
               </v-row>
             </v-col>
           </v-row>
         </v-container>
-      </form>
+      </v-form>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { getProfile,updateProfile } from '../services/profile'
 export default {
   components: {},
   data: () => ({
-    name: "",
+    valid:false,
+    userId:"",
+    firstName : "",
+    lastName : "",
     phoneNumber: "",
     email: "",
+    emailRules: [
+    (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      ],
+    phoneRules:[
+     (val) => /^\d{10}$/.test(val) || "Enter valid phone no."
+    ] , 
+    address: "",
+    gender: "",
+    about: "",
     select: null,
     items: ["Male", "Female", "Trasgender", "Other"],
     checkbox: null,
@@ -170,9 +185,29 @@ export default {
     },
     submit() {
       this.$refs.observer.validate();
+      const data = {
+        email:this.email,
+        first_name:this.firstName,
+        last_name:this.lastName,
+        mobile:this.phoneNumber,
+        gender:this.gender,
+        description:this.about,
+        dob:this.birthdate,
+        location:this.address
+      }
+        if(this.valid){
+          updateProfile(this.userId,data).then(() => {
+          this.$store.dispatch('alert',{
+            type:'success',message:'Profile update successful.'
+         });
+         this.clear();
+      });
+        }
+       this.clear();
     },
     clear() {
-      this.name = "";
+      this.firstName = "";
+      this.lastName = "";
       this.phoneNumber = "";
       this.email = "";
       this.birthdate = "";
@@ -181,7 +216,26 @@ export default {
       this.about = "";
       this.$refs.observer.reset();
     },
+   async getUserProfile(){
+      this.userId = this.$store.getters['authState/getUserId'];
+      console.log(this.userId);
+      let { data } = await getProfile(this.userId);
+      this.email=data.email;
+      this.firstName = data.first_name;
+      this.lastName = data.last_name;
+      this.phoneNumber = data.mobile;
+      this.address = data.location;
+      this.birthdate = data.dob;
+      this.about = data.description;
+      this.gender = data.gender;
+      },
   },
+  computed:{
+    ...mapGetters(['authState/getUserId'])
+  },
+  mounted(){
+    this.getUserProfile();  
+  }
 };
 </script>
 
