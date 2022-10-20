@@ -24,7 +24,7 @@
           </v-col>
         </v-row>
         <v-row class="mb-1">
-          <v-col class="pl-4">
+          <v-col class="pl-4"> 
             <div class="d-block text-caption">
               <strong
                 >{{ EventArr.start_date }} - {{ EventArr.end_date }}</strong
@@ -32,6 +32,7 @@
             </div>
           </v-col>
         </v-row>
+        {{ EventArr.id }}
         <v-img
           height="250"
           max-width="400"
@@ -142,7 +143,7 @@
           <v-col align="center">
             <v-btn icon color="primary">
               <v-icon>mdi-comment</v-icon>
-              <div style="color: #777d74">Comments</div>
+              <div style="color: #777d74">{{ commentCount }} Comments</div>
             </v-btn>
           </v-col>
 
@@ -159,12 +160,13 @@
             <v-text-field
               outlined
               dense
+              v-model="comment"
               label="Add comment"
               prepend-inner-icon="mdi-emoticon-happy-outline"
             ></v-text-field>
           </v-col>
           <v-col cols="1" class="d-flex align-center">
-            <v-icon>mdi-send</v-icon>
+            <v-icon @click="commentEvent(EventArr.id)">mdi-send</v-icon>
           </v-col>
         </v-row>
 
@@ -181,7 +183,7 @@ html {
 </style>
 
 <script>
-import { GetEventById } from "../services/events";
+import { GetEventById,commentOnEvent,countEventComment } from "../services/events";
 import CommentSection from "../../../posts/shared/components/CommentSec.vue";
 export default {
   components: {
@@ -189,6 +191,7 @@ export default {
   },
   data: () => ({
     EventArr: [],
+    comment:'',commentCount:'',
     valid: true,
     name: "",
     nameRules: [
@@ -214,13 +217,22 @@ export default {
     resetValidation() {
       this.$refs.form.resetValidation();
     },
-    
+   async commentEvent(id){
+     await commentOnEvent({event_id:id, comment:this.comment}).then(res => {
+                console.log(res.data);
+        this.$store.dispatch('alert',{ type:'success',message:'Comment Added successfully'})
+      });
+      this.$router.go();        
+   },
+   async getCommentCount(){
+    this.commentCount = await countEventComment(this.$route.params.id);    
+   }  
   },
-  created() {
+  mounted() {
     GetEventById(this.$route.params.id).then((res) => {
       this.EventArr = res.data;
     });
-
+    this.getCommentCount();
   },
 };
 </script>

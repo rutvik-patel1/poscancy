@@ -1,7 +1,6 @@
-import { httpClient } from '../../../shared/services/';
+import { appCookieStorage, httpClient } from '../../../shared/services/';
 import { apiBaseUrl } from '@/environment/environment';
-import Cookies from 'js-cookie';
-const token = Cookies.get('access_token');
+
 const getAllPosts = () => {
     const url = apiBaseUrl + '/items/user_post'
     return httpClient.get(url).then( res => res.data )
@@ -35,6 +34,8 @@ const getCommentsByPost = (id) => {
 }
 const commentOnPost = (data) => {
     const url = apiBaseUrl + '/items/user_post_comment'
-     return httpClient.post(url,data,{ headers: { Authorization: `Bearer ${token}` }}).then(res => res.data);
+     return httpClient.post(url,data,{ headers: {
+        Authorization:`Bearer ${ appCookieStorage.get('access_token') }`
+     }}).then(res => res.data);
 } 
 export { getAllPosts, CreatePost, countLike, countComment,getPost,getCommentsByPost,commentOnPost }
