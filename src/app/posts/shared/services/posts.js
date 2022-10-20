@@ -2,7 +2,7 @@ import { httpClient } from '../../../shared/services/';
 import { apiBaseUrl } from '@/environment/environment';
 import Cookies from 'js-cookie';
 const token = Cookies.get('access_token');
-const getAllPosts = () => {
+ const getAllPosts = () => {
     const url = apiBaseUrl + '/items/user_post'
     return httpClient.get(url).then( res => res.data )
 }
