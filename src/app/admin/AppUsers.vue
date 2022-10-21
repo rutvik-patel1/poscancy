@@ -17,6 +17,13 @@
       class="elevation-1"
       :items-per-page="5"
     >
+    <template v-slot:item.dob="{ item }">
+      <button>{{item.dob || "NA" }}</button>
+    </template>
+
+    <template v-slot:item.first_name="{ item }">
+      <button>{{item.first_name || "NA" }}</button>
+    </template>
 
     <template v-slot:top>
       <v-toolbar
@@ -38,13 +45,14 @@
     </template>
 
       <template v-slot:item.actions="{ item }">
-        <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+        <v-icon small @click="deleteItem(item.id)"> mdi-delete </v-icon>
       </template>
     </v-data-table>
   </v-container>
 </template>
 <script>
 import AddUser from "./shared/AddUser.vue";
+import { getUsers,deleteUser } from "./shared/services/users";
 export default {
   components: { AddUser },
   data() {
@@ -53,76 +61,30 @@ export default {
       editedIndex:0,
       editedItem:"",
       table_headers: [
-        { text: "Name", value: "name", align: "center" },
+        { text: "Name", value: "first_name", align: "center" },
         { text: "Email", value: "email", align: "center" },
         { text: "DOB", value: "dob", align: "center" },
-        { text: "Role", value: "role", align: "center" },
+        { text: "Role", value: "role.name", align: "center" },
         { text: "Action", value: "actions", align: "center" },
       ],
-      users: [
-        {
-          id: 1,
-          name: "Sudarshan Dey",
-          email: "sudarshandey@bacancy.in",
-          dob: "7/11/1997",
-          role: "Admin",
-        },
-        {
-          id: 2,
-          name: "Sudarshan Dey",
-          email: "sudarshandey@bacancy.in",
-          dob: "7/11/1997",
-          role: "Admin",
-        },
-        {
-          id: 3,
-          name: "Sudarshan Dey",
-          email: "sudarshandey@bacancy.in",
-          dob: "7/11/1997",
-          role: "Admin",
-        },
-        {
-          id: 4,
-          name: "Sudarshan Dey",
-          email: "sudarshandey@bacancy.in",
-          dob: "7/11/1997",
-          role: "Admin",
-        },
-        {
-          id: 5,
-          name: "Sudarshan Dey",
-          email: "sudarshandey@bacancy.in",
-          dob: "7/11/1997",
-          role: "Admin",
-        },
-        {
-          id: 6,
-          name: "SudarshanB Dey",
-          email: "sudarshandey@bacancy.in",
-          dob: "7/11/1997",
-          role: "Admin",
-        },
-        {
-          id: 7,
-          name: "SudarshanB Dey",
-          email: "sudarshandey@bacancy.in",
-          dob: "7/11/1997",
-          role: "Admin",
-        },
-        {
-          id: 8,
-          name: "SudarshanB Dey",
-          email: "sudarshandey@bacancy.in",
-          dob: "7/11/1997",
-          role: "Admin",
-        },
-      ],
+      users: [],
     };
   },
+  created(){
+    getUsers().then((res)=>{
+      console.log(res.data)
+      this.users = res.data
+    })
+  },
   methods:{
-    deleteItem (item) {
-        this.editedIndex = this.users.indexOf(item)
-        this.editedItem = Object.assign({}, item)
+    deleteItem(id) {
+      deleteUser(id).then((res)=>{
+        console.log("deleted",res)
+      })
+      getUsers().then((res)=>{
+        console.log(res.data)
+        this.users = res.data
+      })
         this.dialogDelete = true
       },
       close () {

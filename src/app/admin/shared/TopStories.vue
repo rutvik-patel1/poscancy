@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import PostCard from '../../posts/shared/PostCard.vue';
+  import PostCard from '../../posts/shared/components/PostCard.vue';
 export default {
   components:{
     PostCard

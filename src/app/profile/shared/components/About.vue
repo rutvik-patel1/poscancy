@@ -12,13 +12,16 @@
     </div>
 
     <div class="ma-6">
-      <form @submit.prevent="submit">
+      <v-form ref="observer" 
+        v-model="valid" 
+        @submit.prevent="submit">
         <v-container>
           <v-row>
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
               <v-text-field
                 v-model="email"
                 label="Email"
+                :rules="emailRules"
                 required
                 outlined
               ></v-text-field>
@@ -26,10 +29,18 @@
           </v-row>
 
           <v-row>
-            <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
+            <v-col cols="6" xl="5" lg="5" md="5" sm="6" xs="6">
               <v-text-field
-                v-model="name"
-                label="Name"
+                v-model="firstName"
+                label="First Name"
+                required
+                outlined
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6" xl="5" lg="5" md="5" sm="6" xs="6">
+              <v-text-field
+                v-model="lastName"
+                label="Last Name"
                 required
                 outlined
               ></v-text-field>
@@ -41,6 +52,7 @@
               <v-text-field
                 v-model="phoneNumber"
                 label="Phone Number"
+                :rules="phoneRules"
                 required
                 outlined
               ></v-text-field>
@@ -83,7 +95,7 @@
                   :active-picker.sync="activePicker"
                   :max="
                     new Date(
-                      Date.now() - new Date().getTimezoneOffset() * 60000
+                      Date.now() - new Date().getTimezoneOffset() * 6000
                     )
                       .toISOString()
                       .substr(0, 10)
@@ -129,18 +141,28 @@
             </v-col>
           </v-row>
         </v-container>
-      </form>
+      </v-form>
     </div>
   </div>
 </template>
 
 <script>
+import { getProfile,updateProfile } from '../services/profile'
 export default {
   components: {},
   data: () => ({
-    name: "",
+    valid:false,
+    userId:"",
+    firstName : "",
+    lastName : "",
     phoneNumber: "",
     email: "",
+    emailRules: [
+    (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      ],
+    phoneRules:[
+     (val) => /^\d{10}$/.test(val) || "Enter valid phone no."
+    ] , 
     address: "",
     gender: "",
     about: "",
@@ -162,9 +184,29 @@ export default {
     },
     submit() {
       this.$refs.observer.validate();
+      const data = {
+        email:this.email,
+        first_name:this.firstName,
+        last_name:this.lastName,
+        mobile:this.phoneNumber,
+        gender:this.gender,
+        description:this.about,
+        dob:this.birthdate,
+        location:this.address
+      }
+        if(this.valid){
+          updateProfile(this.userId,data).then(() => {
+          this.$store.dispatch('alert',{
+            type:'success',message:'Profile update successful.'
+         });
+         this.$router.go();
+      });
+        }
+       this.clear();
     },
     clear() {
-      this.name = "";
+      this.firstName = "";
+      this.lastName = "";
       this.phoneNumber = "";
       this.email = "";
       this.birthdate = "";
@@ -173,7 +215,23 @@ export default {
       this.about = "";
       this.$refs.observer.reset();
     },
+   async getUserProfile(){
+      this.userId = localStorage.getItem('Id');
+      console.log(this.userId);
+      let { data } = await getProfile(this.userId);
+      this.email=data.email;
+      this.firstName = data.first_name;
+      this.lastName = data.last_name;
+      this.phoneNumber = data.mobile;
+      this.address = data.location;
+      this.birthdate = data.dob;
+      this.about = data.description;
+      this.gender = data.gender;
+      },
   },
+  mounted(){
+    this.getUserProfile();  
+  }
 };
 </script>
 

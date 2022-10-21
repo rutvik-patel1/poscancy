@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { CreatePost } from "../../posts";
+import { CreatePost } from '../../posts/shared/services/posts'
 export default {
   name: "Article",
   data: () => ({
@@ -79,15 +79,15 @@ export default {
     onFileChange(e) {
       this.selectedFile = e.target.files[0];
     },
-    addPost() {
+     addPost() {
       const formData = new FormData();
-      console.log("uploadFile:", uploadFile);
-      formData.append("media", uploadFile);
+
+     formData.append('media', this.selectedFile);
       const data = {
-        media: formData,
-        description: this.content,
-      };
-      CreatePost(data).then((res) => {
+         "media": formData,
+        "description": this.content
+      }
+       CreatePost(data).then((res) => {
         console.log(res.data);
         this.$store.dispatch("alert", {
           type: "success",

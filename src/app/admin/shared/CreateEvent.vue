@@ -8,7 +8,7 @@
           <v-form>
             <v-row class="mt-2 ml-2">
               <v-col>
-                <v-text-field label="Event Name" dense outlined></v-text-field>
+                <v-text-field label="Event Name" dense outlined v-model="eventName"></v-text-field>
               </v-col>
             </v-row>
             <v-row class="mt-2 ml-2">
@@ -89,8 +89,8 @@
                   outlined
                   name="Description"
                   label="Event Description"
-                  value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-                ></v-textarea>
+                  v-model="description"
+                  ></v-textarea>
               </v-col>
             </v-row>
           </v-form>
@@ -103,19 +103,20 @@
                 outlined
                 dense
                 prepend-icon="mdi-camera"
+                @change="onFileChange"
+                v-model="selectedFile"
               ></v-file-input>
             </v-col>
           </v-row>
           <v-row class="mt-2 mr-2">
             <v-col>
               <div
-                style="
-                  height: 230px;
-                  border: 1px solid gray;
-                  margin: 10px;
-                  background-color: aliceblue;
-                "
-              ></div>
+                style="height: 230px;border: 1px solid gray;margin: 10px;background-color: aliceblue;"
+              >
+              <div id="preview">
+    <img v-if="url" :src="url" />
+  </div>
+            </div>
             </v-col>
           </v-row>
         </v-col>
@@ -123,12 +124,12 @@
 
       <v-card-title>Add Participation Form</v-card-title>
       <v-divider class="mb-2"></v-divider>
-      <dyamic-form></dyamic-form>
+      <dyamic-form @getSchema="getSchema"></dyamic-form>
 
       <v-divider class="mb-2"></v-divider>
       <v-row class="mt-2 ml-2">
         <v-col>
-          <v-btn color="primary">Create Event</v-btn>
+          <v-btn color="primary" @click="postEvent">Create Event</v-btn>
         </v-col>
       </v-row>
     </v-card>
@@ -137,6 +138,7 @@
 
 <script>
 import DyamicForm from "./DyamicForm.vue";
+import { createEvent } from "../../admin/shared/services/event"
 export default {
   name: "CreateEvent",
   components: {
@@ -145,6 +147,7 @@ export default {
   data() {
     return {
       eventDate: [],
+      eventName:"test",
       date1: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
@@ -153,10 +156,52 @@ export default {
         .substr(0, 10),
       modal1: false,
       modal2: false,
+      description:"The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.",
+      selectedFile:"",
+      schema:{},
+      url:null
     };
   },
+
+  methods:{
+    getSchema(data){
+       this.schema = JSON.parse(JSON.stringify(data))
+    }, 
+    postEvent(){
+
+      const formData = new FormData();
+      formData.append('media', this.selectedFile);
+      const data = {
+         "media": formData,
+        "description": this.description,
+        "form_schema": this.schema,
+        "start_date": this.date1,
+        "end_date": this.date2,
+        "event_name":this.eventName
+      }
+      createEvent(data).then((res)=>{
+        console.log(res.data)
+      })
+    },
+    onFileChange(e) {
+      console.log(e)
+      const file = e;
+      this.url = URL.createObjectURL(file);
+    }
+  }
 };
 </script>
 
 <style>
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:10px;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 210px;
+}
 </style>

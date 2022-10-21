@@ -83,7 +83,7 @@
                 <v-file-input label="File input" outlined dense></v-file-input>
 
                 <v-radio-group
-                  v-model="row"
+                 
                   label="Select mode of transportation:"
                 >
                   <v-radio label="Option 1" value="radio-1"></v-radio>
@@ -164,7 +164,7 @@ html {
 
 
 <script>
-import CommentSection from "../posts/shared/CommentSec.vue";
+import CommentSection from "../posts/shared/components/CommentSec.vue";
 export default {
   components: {
     CommentSection,

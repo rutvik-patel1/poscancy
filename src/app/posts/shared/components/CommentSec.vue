@@ -2,7 +2,7 @@
   <div>
     <v-row v-for="comment in CommentArr" :key="comment.id">
       <v-col cols="2" lg="1">
-        <v-avatar size="45px" v-bind="attrs" v-on="on">
+        <v-avatar size="45px">
           <img
             alt="Avatar"
             :src="
@@ -20,14 +20,15 @@
         <div class="d-block">{{ comment.comment }}</div>
       </v-col>
     </v-row>
-    <v-row class="mb-2" justify="center"
+    <v-row class="2" justify="center"
       ><v-btn depressed>See More Comments</v-btn></v-row
     >
   </div>
 </template>
 
 <script>
-import { GetCommentsByEvent } from "../../events/shared/services/events";
+import { GetCommentsByEvent } from "../../../events/shared/services/events";
+import { getCommentsByPost } from "../services/posts";
 export default {
   props: ["from"],
   data() {
@@ -42,7 +43,9 @@ export default {
           this.CommentArr = res.data;
         });
       } else if (this.from === "post") {
-        console.log('for post')
+        getCommentsByPost(this.$route.params.id).then((res)=>{
+          this.CommentArr = res.data;
+        })
       } else {
         console.log('nothing')
       }
