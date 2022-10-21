@@ -10,5 +10,11 @@ const createEvent = async (data) => {
     return httpClient.post(url,data).then( res => res.data );
   };
 
-export { createEvent }
+
+  const getEventResponse = async (id) => {
+    const url = apiBaseUrl + '/items/response?filter[event_id][_eq]='+id
+    return httpClient.get(url).then(res => res.data );
+  };
+
+export { createEvent,getEventResponse }
 

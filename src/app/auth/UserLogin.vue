@@ -74,6 +74,7 @@
   </v-container>
 </template>
 <script>
+import jsCookie from 'js-cookie';
 import { mapActions } from 'vuex';
 import { appCookieStorage } from '../shared/services';
 import { login,loggedInUser } from './shared/services/auth';
@@ -112,6 +113,7 @@ export default {
     async login(){
       let res = await login(this.email,this.password);
       appCookieStorage.set('access_token',res.data.access_token);
+      jsCookie.set('refresh_token',res.data.refresh_token)
       let user = await loggedInUser(res.data.access_token);
       console.log(user);
       localStorage.setItem('Id',user.data.id);
@@ -132,7 +134,7 @@ export default {
   }
  },
  mounted(){
-this.autoLogin();  
+// this.autoLogin();  
 }
 };
 </script>

@@ -43,7 +43,7 @@
         </template>
       </v-autocomplete>
 
-      <v-btn text>
+      <v-btn  @click="getNeWToken">
         <v-icon>notifications</v-icon>
       </v-btn>
 
@@ -62,6 +62,7 @@
         <v-list>
           <v-list-item v-on:click="profilePage"> Profile </v-list-item>
           <v-list-item v-on:click="logOut"> Logout </v-list-item>
+          <v-list-item v-on:click="getNeWToken"> Refresh token</v-list-item>
         </v-list>
       </v-menu>
     </v-app-bar>
@@ -105,8 +106,9 @@
 <script>
 import { getUserDetails } from '../../profile/shared/services/profile'
 import { mapGetters,mapActions } from 'vuex';
-import { logout } from '../../auth/shared/services/auth';
+import { logout,refreshToken } from '../../auth/shared/services/auth';
 import { appCookieStorage } from '../services';
+
 export default {
   data() {
     return {
@@ -160,6 +162,11 @@ export default {
     },
     profilePage() {
       this.$router.push('/profile');
+    },
+    async getNeWToken(){
+      console.log("1")
+      await refreshToken()
+      console.log("2")
     }
   },
   computed:{
@@ -169,6 +176,7 @@ export default {
     this.uid = this.$store.getters['authState/getUserId'];
     console.log(this.uid);
     this.getuserDetails();
+  
   }
 };
 </script>
